@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name AM26LS32CN)(type Legacy)(uri ${KIPRJMOD}/symbols/AM26LS32CN.lib)(options "")(descr ""))
+  (lib (name AM26C31CN)(type Legacy)(uri ${KIPRJMOD}/symbols/AM26C31CN.lib)(options "")(descr ""))
+)

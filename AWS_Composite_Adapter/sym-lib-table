@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name DC_JACK_PJ-037B.)(type Legacy)(uri ${KIPRJMOD}/library/PJ-037B.lib)(options "")(descr ""))
+  (lib (name RCA_Jack)(type Legacy)(uri ${KIPRJMOD}/library/PJRAN1X1U04X.lib)(options "")(descr ""))
+)
