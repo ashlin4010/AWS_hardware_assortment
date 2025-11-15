@@ -1,3 +1,0 @@
-(fp_lib_table
-  (lib (name aliexpress)(type KiCad)(uri ${KIPRJMOD}/aliexpress.pretty)(options "")(descr ""))
-)

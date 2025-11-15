@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "AWS")(type "KiCad")(uri "${KIPRJMOD}/AWS.kicad_sym")(options "")(descr ""))
+)
