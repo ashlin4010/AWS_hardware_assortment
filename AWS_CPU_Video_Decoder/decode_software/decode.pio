@@ -1,0 +1,119 @@
+.pio_version 0 // only requires PIO version 0
+
+; This program will wait for the falling edge of Vsync
+.program vsync
+.wrap_target
+    wait 1 pin 0
+    wait 0 pin 0    ; Wait for Vsync falling edge
+    irq 0           ; Signal start of new screen
+
+hlt:
+    jmp hlt
+.wrap
+
+; This program will wait for the start of a new screen
+; Skip the first 10 rasters and signal on the start of the 11th
+; It will signal 28 times then wait for the next new screen
+.program raster
+.wrap_target
+    wait irq 0      ; Wait for signal for new screen
+    set y 27        ; Load row counter
+
+row_loop:
+    set x 9        ; Load the skip counter
+
+skip_rasters:
+    ; Skip 10 rasters
+    wait 1 pin 0
+    wait 0 pin 0    ; Wait for falling edge of hsync
+    jmp x-- skip_rasters
+
+    ; Signal 10th raster
+    irq 2           
+
+    ; Keep looping over rows untill the 28th (last row)
+    jmp y-- row_loop
+.wrap
+
+
+; This program will capture x character codes and push them out
+; Autopush must be enabled, with a threshold of 8.
+.program capture
+    pull block  ; Load the number of characters we wish to capture
+
+.wrap_target
+    mov x, osr  ; Load the counter into x
+    wait irq 2  ; Wait for the right raster line to start capture
+
+capture_loop:
+    wait 0 pin 8    ; Wait for the CCLK to go LOW
+    in pins, 8      ; Read in character code
+    wait 1 pin 8    ; Wait for the CCLK to go HIGH
+    jmp x-- capture_loop
+.wrap
+; Return back to the start and wait for next capture
+
+
+
+% c-sdk {
+static inline void vsync_program_init(PIO pio, uint sm, uint offset, uint vsync) {
+    
+    // Set vsync as input
+    pio_sm_set_consecutive_pindirs(pio, sm, vsync, 1, false);
+
+    // Get default config
+    pio_sm_config c = vsync_program_get_default_config(offset);
+
+    // Set the "in/wait pins" base
+    sm_config_set_in_pins(&c, vsync);
+
+    // Load our configuration, and jump to the start of the program
+    pio_sm_init(pio, sm, offset, &c);
+
+    // Set the state machine running
+    pio_sm_set_enabled(pio, sm, true);
+}
+
+static inline void raster_program_init(PIO pio, uint sm, uint offset, uint hsync) {
+
+    // Set hsync as input
+    pio_sm_set_consecutive_pindirs(pio, sm, hsync, 1, false);
+
+    // Get default config
+    pio_sm_config c = raster_program_get_default_config(offset);
+
+    // Set the "in/wait pins" base
+    sm_config_set_in_pins(&c, hsync);
+
+    // Load our configuration, and jump to the start of the program
+    pio_sm_init(pio, sm, offset, &c);
+
+    // Set the state machine running
+    pio_sm_set_enabled(pio, sm, true);
+
+}
+
+static inline void capture_program_init(PIO pio, uint sm, uint offset, uint code_pins_cclk_base) {
+    // Set the cclk and code pins as inputs
+    pio_sm_set_consecutive_pindirs(pio, sm, code_pins_cclk_base, 9, false);
+
+    // Get default config
+    pio_sm_config c = capture_program_get_default_config(offset);
+
+    // Set the "in/wait pins" base
+    sm_config_set_in_pins(&c, code_pins_cclk_base);
+
+    // Shift to right, autopush enabled
+    sm_config_set_in_shift(&c, false, true, 8);
+
+    // Load our configuration, and jump to the start of the program
+    pio_sm_init(pio, sm, offset, &c);
+
+    // Set the state machine running
+    pio_sm_set_enabled(pio, sm, true);
+
+    // Write the capture count (this should not block for long)
+    pio_sm_put_blocking(pio, sm, 79);
+}
+
+%}
