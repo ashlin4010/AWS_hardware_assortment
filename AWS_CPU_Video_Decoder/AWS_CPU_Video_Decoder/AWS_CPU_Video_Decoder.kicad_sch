@@ -5788,6 +5788,16 @@
 		)
 		(uuid "0d564292-86b9-42df-82e6-402da7cf5f57")
 	)
+	(text "Note: use 19,20,21 for video"
+		(exclude_from_sim no)
+		(at 399.034 72.39 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "15edb9f1-c4ac-42b9-9d36-4f091338c5d6")
+	)
 	(text "Half-bit shift"
 		(exclude_from_sim no)
 		(at 127 152.654 0)
