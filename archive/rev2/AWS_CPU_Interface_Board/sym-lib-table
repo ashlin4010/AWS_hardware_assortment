@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "AWS_CPU_Interface_Board-rescue")(type "KiCad")(uri "${KIPRJMOD}/AWS_CPU_Interface_Board-rescue.kicad_sym")(options "")(descr ""))
+)
