@@ -20,7 +20,7 @@ hlt:
     set y 27        ; Load row counter
 
 row_loop:
-    set x 9        ; Load the skip counter
+    set x 10        ; Load the skip counter
 
 skip_rasters:
     ; Skip 10 rasters
@@ -29,7 +29,7 @@ skip_rasters:
     jmp x-- skip_rasters
 
     ; Signal 10th raster
-    irq 2           
+    irq 2
 
     ; Keep looping over rows untill the 28th (last row)
     jmp y-- row_loop
