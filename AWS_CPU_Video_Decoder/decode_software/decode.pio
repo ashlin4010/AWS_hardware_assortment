@@ -17,7 +17,7 @@ hlt:
 .program raster
 .wrap_target
     wait irq 0      ; Wait for signal for new screen
-    set y 27        ; Load row counter
+    set y 28        ; Load row counter
 
 row_loop:
     set x 10        ; Load the skip counter
@@ -45,6 +45,10 @@ skip_rasters:
     mov x, osr  ; Load the counter into x
     wait irq 2  ; Wait for the right raster line to start capture
 
+    ; Skip the first char
+    wait 0 pin 8    ; Wait for the CCLK to go LOW
+    wait 1 pin 8    ; Wait for the CCLK to go HIGH
+
 capture_loop:
     wait 0 pin 8    ; Wait for the CCLK to go LOW
     in pins, 8      ; Read in character code
@@ -57,7 +61,7 @@ capture_loop:
 
 % c-sdk {
 static inline void vsync_program_init(PIO pio, uint sm, uint offset, uint vsync) {
-    
+
     // Set vsync as input
     pio_sm_set_consecutive_pindirs(pio, sm, vsync, 1, false);
 

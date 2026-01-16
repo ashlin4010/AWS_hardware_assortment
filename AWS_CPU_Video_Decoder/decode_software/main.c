@@ -10,12 +10,16 @@
 #define CCODE_PINS 4 // 4-11
 #define CCLK_PIN 12
 
+#define UART_ID uart0
+#define BAUD_RATE 921600
+
 uint8_t screen_data[4096];
 
 
 int main() {
     set_sys_clock_khz(125000, true);
     stdio_init_all();
+    uart_init(UART_ID, BAUD_RATE);
 
     // Allow time for the USB uart to connect
     sleep_ms(3000);
@@ -70,7 +74,7 @@ int main() {
 
     printf("\033[?25l");  // hide cursor
 
-    
+
     while (1) {
         uint c_count = 0;
         uint8_t *p = screen_data;
@@ -79,7 +83,7 @@ int main() {
         raster_program_init(pio, sm_raster, offset_raster, HSYNC_PIN);
         vsync_program_init(pio, sm_vsync, offset_vsync, VSYNC_PIN);
 
-        while (c_count < 2240) {
+        while (c_count < 80 * 29) {
             uint8_t byte = 0xFF & pio_sm_get_blocking(pio, sm_capture);
             c_count++;
             *p = byte;
@@ -93,12 +97,37 @@ int main() {
 
         printf("\033[H"); // just move to top-left
         printf("Done, count: %d\n", c_count);
+        putchar('\n');
+        printf("+--------------------------------------------------------------------------------+");
+        putchar('\n');
 
-        uint index = 0;
-        for(uint i = 0; i < 28; i++) {
+        // uint index = 0;
+        for(uint i = 0; i < 29; i++) {
+            putchar('|');
             for(uint j = 0; j < 80; j++) {
-                printf("%c", (char)screen_data[index]);
-                index++;
+                uint index = (i * 80) + j;
+                unsigned char c = screen_data[index];
+
+                if ((c >= 32 && c <= 126) || c >= 128) {
+                    putchar(c);
+                } else {
+                    putchar(' ');
+                }
+            }
+            putchar('|');
+            printf("\n");
+        }
+        printf("+--------------------------------------------------------------------------------+");
+        printf("\n\n");
+
+        // print screen in hex
+        for(uint i = 0; i < 29; i++) {
+            for(uint j = 0; j < 80; j++) {
+                uint index = (i * 80) + j;
+                unsigned char c = screen_data[index];
+
+                printf("%02x ", c);
+
             }
             printf("\n");
         }
