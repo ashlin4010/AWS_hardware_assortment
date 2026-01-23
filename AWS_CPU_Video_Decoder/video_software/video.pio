@@ -1,0 +1,159 @@
+.pio_version 0 // only requires PIO version 0
+
+
+; Runs at 31.25Mhz (125/4)
+.program hsync
+    pull block
+
+.wrap_target
+    mov x, osr  ; Load the counter into x
+
+    wait irq 0
+
+    ; Front Porch 0.3v (51 cycles)
+    set pins, 2 [31]
+    set pins, 2 [18]
+
+    ; H-Sync Pulse 0v (148 cycles)
+    set pins, 0 [31] ; (32 cycles)
+    set pins, 0 [31] ; (64 cycles)
+    set pins, 0 [31] ; (96 cycles)
+    set pins, 0 [31] ; (128)
+    set pins, 0 [19] ; (148)
+
+    ; Back Porch 0.3v (176 cycles)
+    set pins, 2 [31] ; (32 cycles)
+    set pins, 2 [31] ; (64 cycles)
+    set pins, 2 [31] ; (96 cycles)
+    set pins, 2 [31] ; (128)
+    set pins, 2 [31] ; (160)
+    set pins, 2 [15] ; (176)
+
+    ; Screen Data 0.5v
+    ; This loop use two clock per loop.
+    ; So loop 1/2 the number of delays wanted
+loop:
+    ; set pins, 6
+    out pins, 3
+    jmp x-- loop
+
+    irq 1
+.wrap
+
+
+.program vsync
+    pull block
+.wrap_target
+    mov x, osr      ; Load the counter into x
+
+    wait irq 2      ; Wait for start
+loop:
+    set pins, 2
+    jmp x-- loop
+
+    irq 1   ; Allow counter to restart
+.wrap
+
+
+
+.program line
+    pull block
+.wrap_target
+    mov x, osr      ; Load the counter into x
+loop:
+    irq 0
+    wait irq 1
+    jmp x-- loop
+
+    irq 2
+    wait irq 1
+.wrap
+
+
+
+
+
+% c-sdk {
+
+static inline void hsync_program_init(PIO pio, uint sm, uint offset, uint hsync) {
+
+    // Set hsync as output
+    pio_sm_set_consecutive_pindirs(pio, sm, hsync, 3, true);
+
+    // Get default config
+    pio_sm_config c = hsync_program_get_default_config(offset);
+
+    sm_config_set_out_pins(&c, hsync, 3);
+
+    // Set the "out pins" base
+    sm_config_set_set_pins(&c, hsync, 3);
+
+    sm_config_set_fifo_join(&c, PIO_FIFO_JOIN_TX);
+
+    sm_config_set_out_shift(&c, true, true, 32);
+
+    // Set clock division (div by 4 for 31.25Mhz state machine)
+    sm_config_set_clkdiv(&c, 4);
+
+    // Load our configuration, and jump to the start of the program
+    pio_sm_init(pio, sm, offset, &c);
+
+    // Set the state machine running
+    pio_sm_set_enabled(pio, sm, true);
+
+    // Want to loop over 1624 dots but each loop takes two clocks.
+    pio_sm_put_blocking(pio, sm, 800);
+}
+
+
+static inline void line_program_init(PIO pio, uint sm, uint offset, uint dac) {
+
+    // Set hsync as output
+    pio_sm_set_consecutive_pindirs(pio, sm, dac, 3, true);
+
+    // Get default config
+    pio_sm_config c = line_program_get_default_config(offset);
+
+    // Set the "out pins" base
+    sm_config_set_set_pins(&c, dac, 3);
+
+    // Set clock division (div by 4 for 31.25Mhz state machine)
+    sm_config_set_clkdiv(&c, 8);
+
+    // Load our configuration, and jump to the start of the program
+    pio_sm_init(pio, sm, offset, &c);
+
+    // Set the state machine running
+    pio_sm_set_enabled(pio, sm, true);
+
+    // Want to loop over 1624 dots but each loop takes two clocks.
+    pio_sm_put_blocking(pio, sm, 300);
+}
+
+
+static inline void vsync_program_init(PIO pio, uint sm, uint offset, uint dac) {
+
+    // Set hsync as output
+    pio_sm_set_consecutive_pindirs(pio, sm, dac, 3, true);
+
+    // Get default config
+    pio_sm_config c = vsync_program_get_default_config(offset);
+
+    // Set the "out pins" base
+    sm_config_set_set_pins(&c, dac, 3);
+
+    // Set clock division (div by 4 for 31.25Mhz state machine)
+    sm_config_set_clkdiv(&c, 4);
+
+    // Load our configuration, and jump to the start of the program
+    pio_sm_init(pio, sm, offset, &c);
+
+    // Set the state machine running
+    pio_sm_set_enabled(pio, sm, true);
+
+    // Want to loop over 1624 dots but each loop takes two clocks.
+    pio_sm_put_blocking(pio, sm, 625);
+}
+
+
+%}

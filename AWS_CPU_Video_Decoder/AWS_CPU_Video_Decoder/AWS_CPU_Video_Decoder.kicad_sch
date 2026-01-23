@@ -4057,6 +4057,130 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:R"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R"
+				(at 2.032 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "R"
+				(at 0 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "R res resistor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "R_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.016 -2.54)
+					(end 1.016 2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Jumper:Jumper_2_Small_Bridged"
 			(pin_numbers
 				(hide yes)
@@ -6123,7 +6247,7 @@
 	)
 	(text "Note: use 19,20,21 for video"
 		(exclude_from_sim no)
-		(at 399.034 72.39 0)
+		(at 427.99 70.866 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6155,7 +6279,7 @@
 	)
 	(text "TODO: Reset"
 		(exclude_from_sim no)
-		(at 108.204 267.97 0)
+		(at 87.884 267.97 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6255,6 +6379,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "23d3ccf5-3d92-46a0-8bda-639c517a1375")
+	)
+	(junction
+		(at 156.21 240.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "28e76ffe-955e-47ae-ba8e-33ddb234163c")
 	)
 	(junction
 		(at 369.57 181.61)
@@ -6485,6 +6615,12 @@
 		(uuid "931822bd-5849-465b-8770-475da1e25a95")
 	)
 	(junction
+		(at 156.21 250.19)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "939d0073-4391-4ce5-8191-6ed4b702c78e")
+	)
+	(junction
 		(at 367.03 139.7)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6521,7 +6657,7 @@
 		(uuid "a24c5877-320e-41a7-9c44-ea4da26351de")
 	)
 	(junction
-		(at 152.4 266.7)
+		(at 78.74 228.6)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a4afcdf2-5a7f-48d2-bba9-545d50e65b81")
@@ -6611,6 +6747,12 @@
 		(uuid "c3d7dd1b-8178-42e2-a74f-a2688a6f2514")
 	)
 	(junction
+		(at 156.21 260.35)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c3e985d3-c8d3-4d9b-bc32-a563b09750f0")
+	)
+	(junction
 		(at 264.16 222.25)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6653,7 +6795,7 @@
 		(uuid "de592b0d-74ac-4cd3-b30d-734b07d8b901")
 	)
 	(junction
-		(at 152.4 278.13)
+		(at 78.74 240.03)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e23e27a7-0077-4d40-9cc6-9ea319ec7bd7")
@@ -6884,6 +7026,16 @@
 	)
 	(wire
 		(pts
+			(xy 156.21 240.03) (xy 158.75 240.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "04c0eca0-2fbf-4be6-8e86-5a6aa33ef108")
+	)
+	(wire
+		(pts
 			(xy 257.81 54.61) (xy 270.51 54.61)
 		)
 		(stroke
@@ -6914,7 +7066,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 275.59) (xy 152.4 275.59)
+			(xy 77.47 237.49) (xy 78.74 237.49)
 		)
 		(stroke
 			(width 0)
@@ -6961,6 +7113,16 @@
 			(type default)
 		)
 		(uuid "079440b9-5f0d-4da9-a29c-3928a36c062f")
+	)
+	(wire
+		(pts
+			(xy 156.21 270.51) (xy 158.75 270.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08f3319a-a2c3-44fa-a49a-98c6573026ee")
 	)
 	(wire
 		(pts
@@ -7555,7 +7717,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 265.43) (xy 152.4 266.7)
+			(xy 78.74 227.33) (xy 78.74 228.6)
 		)
 		(stroke
 			(width 0)
@@ -7642,16 +7804,6 @@
 			(type default)
 		)
 		(uuid "4bb3f03d-bfb3-4230-ae1f-239022e4a827")
-	)
-	(wire
-		(pts
-			(xy 161.29 260.35) (xy 151.13 260.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4cda59e4-8fd8-44de-8c1d-d338a7ac9d25")
 	)
 	(wire
 		(pts
@@ -7855,6 +8007,16 @@
 	)
 	(wire
 		(pts
+			(xy 156.21 250.19) (xy 156.21 251.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "61bec439-cbac-441c-b712-9a2e740455d1")
+	)
+	(wire
+		(pts
 			(xy 335.28 196.85) (xy 344.17 196.85)
 		)
 		(stroke
@@ -7865,7 +8027,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 278.13) (xy 151.13 278.13)
+			(xy 78.74 240.03) (xy 77.47 240.03)
 		)
 		(stroke
 			(width 0)
@@ -7955,7 +8117,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 269.24) (xy 152.4 266.7)
+			(xy 78.74 231.14) (xy 78.74 228.6)
 		)
 		(stroke
 			(width 0)
@@ -8035,6 +8197,16 @@
 	)
 	(wire
 		(pts
+			(xy 156.21 260.35) (xy 158.75 260.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70819e57-e04a-41ee-b750-1ce978c06202")
+	)
+	(wire
+		(pts
 			(xy 269.24 139.7) (xy 270.51 139.7)
 		)
 		(stroke
@@ -8042,6 +8214,16 @@
 			(type default)
 		)
 		(uuid "7106a57c-a356-4741-b9c6-c34b5030e50f")
+	)
+	(wire
+		(pts
+			(xy 156.21 260.35) (xy 156.21 261.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "714090f6-7ae5-4dee-a5a4-7981a4a02d62")
 	)
 	(wire
 		(pts
@@ -8222,6 +8404,16 @@
 			(type default)
 		)
 		(uuid "85c65c92-fb53-44a1-bcb0-e3c98a8a5237")
+	)
+	(wire
+		(pts
+			(xy 156.21 248.92) (xy 156.21 250.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "86c6598a-3f5c-4516-ad10-15afc1215da6")
 	)
 	(wire
 		(pts
@@ -8455,6 +8647,16 @@
 	)
 	(wire
 		(pts
+			(xy 156.21 240.03) (xy 156.21 241.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "95225135-a38b-4aab-9187-3f613e9bd589")
+	)
+	(wire
+		(pts
 			(xy 370.84 41.91) (xy 383.54 41.91)
 		)
 		(stroke
@@ -8542,6 +8744,16 @@
 			(type default)
 		)
 		(uuid "9c6c2576-c6c5-418f-9bbe-bc25c1e213ad")
+	)
+	(wire
+		(pts
+			(xy 156.21 250.19) (xy 158.75 250.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9d29f748-7248-4599-8af0-9cfbe6b270db")
 	)
 	(wire
 		(pts
@@ -8715,7 +8927,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 275.59) (xy 152.4 278.13)
+			(xy 78.74 237.49) (xy 78.74 240.03)
 		)
 		(stroke
 			(width 0)
@@ -8926,7 +9138,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 280.67) (xy 152.4 278.13)
+			(xy 78.74 242.57) (xy 78.74 240.03)
 		)
 		(stroke
 			(width 0)
@@ -9066,7 +9278,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 269.24) (xy 152.4 269.24)
+			(xy 77.47 231.14) (xy 78.74 231.14)
 		)
 		(stroke
 			(width 0)
@@ -9126,6 +9338,26 @@
 	)
 	(wire
 		(pts
+			(xy 151.13 234.95) (xy 148.59 234.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d31a327d-9669-4afa-820e-4f76c59b0367")
+	)
+	(wire
+		(pts
+			(xy 170.18 270.51) (xy 170.18 273.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d3a8105c-503e-43f7-883d-852cd39acc99")
+	)
+	(wire
+		(pts
 			(xy 367.03 152.4) (xy 367.03 139.7)
 		)
 		(stroke
@@ -9143,6 +9375,16 @@
 			(type default)
 		)
 		(uuid "d485820e-0732-44ed-a800-2dd470eb46d0")
+	)
+	(wire
+		(pts
+			(xy 156.21 259.08) (xy 156.21 260.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d80cb8a5-a82a-4834-8e24-276ebd0c78b0")
 	)
 	(wire
 		(pts
@@ -9216,16 +9458,6 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 260.35) (xy 151.13 257.81)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e006fe2f-d243-4c9b-a42e-8f8f48455bb5")
-	)
-	(wire
-		(pts
 			(xy 335.28 194.31) (xy 341.63 194.31)
 		)
 		(stroke
@@ -9283,6 +9515,16 @@
 			(type default)
 		)
 		(uuid "e2f36899-bcd7-4684-ad2a-480bf11dc109")
+	)
+	(wire
+		(pts
+			(xy 166.37 270.51) (xy 170.18 270.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e2fbb90c-6d58-4e6e-9c07-80162d35a621")
 	)
 	(wire
 		(pts
@@ -9496,6 +9738,16 @@
 	)
 	(wire
 		(pts
+			(xy 156.21 269.24) (xy 156.21 270.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f295fa4a-ec45-45e9-b886-0aa3c7ca691c")
+	)
+	(wire
+		(pts
 			(xy 379.73 227.33) (xy 367.03 227.33)
 		)
 		(stroke
@@ -9577,6 +9829,16 @@
 	)
 	(wire
 		(pts
+			(xy 148.59 234.95) (xy 148.59 237.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f79a79d8-d26b-423c-baa9-145e6b3a36f9")
+	)
+	(wire
+		(pts
 			(xy 304.8 181.61) (xy 294.64 181.61)
 		)
 		(stroke
@@ -9594,16 +9856,6 @@
 			(type default)
 		)
 		(uuid "f96437bd-46e7-468a-9521-597c971e1d15")
-	)
-	(wire
-		(pts
-			(xy 151.13 255.27) (xy 156.21 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fa3015a1-1884-4101-985a-7fdbf73a7e01")
 	)
 	(wire
 		(pts
@@ -9627,7 +9879,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 266.7) (xy 151.13 266.7)
+			(xy 78.74 228.6) (xy 77.47 228.6)
 		)
 		(stroke
 			(width 0)
@@ -10933,6 +11185,28 @@
 			)
 		)
 	)
+	(global_label "DAC1"
+		(shape input)
+		(at 179.07 250.19 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6124f70b-0edd-435b-bb28-1fff49dced5a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 186.8933 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "VSYNC_LV"
 		(shape input)
 		(at 335.28 144.78 180)
@@ -11034,6 +11308,28 @@
 		(uuid "67ea9f05-609d-4b41-a818-35aa1a1b7d19")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 354.11 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DAC1"
+		(shape input)
+		(at 383.54 69.85 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "68649ea9-8220-4e64-9be5-9d6550e7b272")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 391.3633 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11395,6 +11691,28 @@
 			)
 		)
 	)
+	(global_label "DAC2"
+		(shape input)
+		(at 179.07 240.03 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7a3cad69-8f55-4c05-806c-62b791aed848")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 186.8933 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "LA0"
 		(shape input)
 		(at 120.65 86.36 0)
@@ -11703,6 +12021,28 @@
 			)
 		)
 	)
+	(global_label "DAC2"
+		(shape input)
+		(at 383.54 64.77 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "98fb7fdd-fa11-4b5a-b8e7-724830315fed")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 391.3633 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "P_RESET"
 		(shape input)
 		(at 370.84 44.45 180)
@@ -11721,6 +12061,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DAC0"
+		(shape input)
+		(at 179.07 260.35 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9c479ab6-2d31-4225-a29d-ca2b428a7264")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 186.8933 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -12165,6 +12527,28 @@
 			)
 		)
 	)
+	(global_label "DAC0"
+		(shape input)
+		(at 383.54 72.39 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b726b401-f9d4-4eb2-a605-8afe85c06d10")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 391.3633 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "CCLK"
 		(shape input)
 		(at 107.95 165.1 180)
@@ -12189,7 +12573,7 @@
 	)
 	(global_label "~{RESET_LV}"
 		(shape input)
-		(at 113.03 270.51 180)
+		(at 92.71 270.51 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12199,7 +12583,7 @@
 		)
 		(uuid "bc51cae1-714f-4b95-8c94-c415e3603bbe")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 101.2154 270.51 0)
+			(at 80.8954 270.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13135,7 +13519,7 @@
 	)
 	(global_label "P_RESET"
 		(shape input)
-		(at 80.01 232.41 180)
+		(at 39.37 227.33 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13145,7 +13529,7 @@
 		)
 		(uuid "f4a8c45b-1217-490a-8901-7096531085f9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 69.0421 232.41 0)
+			(at 28.4021 227.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13421,6 +13805,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 156.21 265.43 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "05e0f4fe-db1a-43d2-8395-111082a6ec92")
+		(property "Reference" "R7"
+			(at 152.146 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100R"
+			(at 156.21 267.97 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
+			(at 154.432 265.43 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 156.21 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 156.21 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5d8ea87d-28cf-4159-ab53-4187397e666c")
+		)
+		(pin "2"
+			(uuid "f3041178-b17e-435c-b75f-0bf6d2fb6297")
+		)
+		(instances
+			(project "AWS_CPU_Video_Decoder"
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "R7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "local:level_shift")
 		(at 280.67 180.34 0)
 		(unit 1)
@@ -13580,6 +14033,75 @@
 			(project "AWS_CPU_Video_Decoder"
 				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
 					(reference "#PWR044")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 170.18 250.19 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0a17da07-2473-40f4-8549-c64c77aa6952")
+		(property "Reference" "R2"
+			(at 171.196 248.158 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22R"
+			(at 171.958 250.19 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
+			(at 170.18 251.968 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 170.18 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 170.18 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5fe592fa-5602-410d-ba21-230665f67216")
+		)
+		(pin "2"
+			(uuid "1490199e-b0eb-4b1e-afad-3f96e1c01a66")
+		)
+		(instances
+			(project "AWS_CPU_Video_Decoder"
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "R2")
 					(unit 1)
 				)
 			)
@@ -13939,7 +14461,7 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 152.4 265.43 0)
+		(at 78.74 227.33 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13947,7 +14469,7 @@
 		(dnp no)
 		(uuid "206c99b8-5809-4d57-ac22-9196c63fcd7e")
 		(property "Reference" "#PWR049"
-			(at 152.4 269.24 0)
+			(at 78.74 231.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13956,7 +14478,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 154.94 264.414 0)
+			(at 81.28 226.314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13964,7 +14486,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 152.4 265.43 0)
+			(at 78.74 227.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13973,7 +14495,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 152.4 265.43 0)
+			(at 78.74 227.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13982,7 +14504,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 152.4 265.43 0)
+			(at 78.74 227.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14063,6 +14585,75 @@
 			(project "AWS_CPU_Video_Decoder"
 				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
 					(reference "#PWR010")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 170.18 240.03 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "24477ac4-99e5-499d-858c-cd13ce9c00d8")
+		(property "Reference" "R3"
+			(at 171.196 237.998 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22R"
+			(at 171.958 240.03 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
+			(at 170.18 241.808 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 170.18 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 170.18 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3c3d3c3c-b5d7-4e62-8d5a-23c56e00800b")
+		)
+		(pin "2"
+			(uuid "a17473ca-58d0-4c44-b0b4-c29b7bd6780f")
+		)
+		(instances
+			(project "AWS_CPU_Video_Decoder"
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "R3")
 					(unit 1)
 				)
 			)
@@ -14476,6 +15067,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 170.18 260.35 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "33b03f9b-a628-4beb-8e2a-70bcefe0ff9d")
+		(property "Reference" "R1"
+			(at 171.45 258.318 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22R"
+			(at 171.958 260.35 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
+			(at 170.18 262.128 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 170.18 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 170.18 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "31e4b0f2-c221-4ab1-b94f-dcaaccb124a3")
+		)
+		(pin "2"
+			(uuid "2da0e273-d525-4e71-ad4d-8536a1fc08bb")
+		)
+		(instances
+			(project ""
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "R1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x04_Pin")
 		(at 326.39 179.07 0)
 		(unit 1)
@@ -14760,7 +15420,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 152.4 280.67 0)
+		(at 78.74 242.57 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14769,7 +15429,7 @@
 		(fields_autoplaced yes)
 		(uuid "459ab190-1521-4ca0-b0c8-a44e36e65783")
 		(property "Reference" "#PWR07"
-			(at 152.4 287.02 0)
+			(at 78.74 248.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14778,7 +15438,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 152.4 285.75 0)
+			(at 78.74 247.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14786,7 +15446,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 152.4 280.67 0)
+			(at 78.74 242.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14795,7 +15455,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 152.4 280.67 0)
+			(at 78.74 242.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14804,7 +15464,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 152.4 280.67 0)
+			(at 78.74 242.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14892,34 +15552,32 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_Coaxial")
-		(at 161.29 255.27 0)
+		(at 156.21 234.95 270)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "4b4d91d6-f24a-4d0d-b844-2ca9afb703f7")
 		(property "Reference" "J16"
-			(at 163.83 254.2931 0)
+			(at 155.9168 228.6 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Value" "Video"
-			(at 163.83 256.8331 0)
+			(at 155.9168 231.14 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" "local:SWITCHCRAFT_PJRAN1X1U04X"
-			(at 161.29 255.27 0)
+			(at 156.21 234.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14928,7 +15586,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 161.29 255.27 0)
+			(at 156.21 234.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14937,7 +15595,7 @@
 			)
 		)
 		(property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, LEMO, ...)"
-			(at 161.29 255.27 0)
+			(at 156.21 234.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15030,7 +15688,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x02_Pin")
-		(at 146.05 275.59 0)
+		(at 72.39 237.49 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15039,7 +15697,7 @@
 		(fields_autoplaced yes)
 		(uuid "4e64782e-bfae-4b15-8f71-1777b6aec969")
 		(property "Reference" "J19"
-			(at 146.685 273.05 0)
+			(at 73.025 234.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15047,7 +15705,7 @@
 			)
 		)
 		(property "Value" "Conn_01x02_Pin"
-			(at 146.685 273.05 0)
+			(at 73.025 234.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15056,7 +15714,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
-			(at 146.05 275.59 0)
+			(at 72.39 237.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15065,7 +15723,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 146.05 275.59 0)
+			(at 72.39 237.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15074,7 +15732,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 146.05 275.59 0)
+			(at 72.39 237.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15168,6 +15826,75 @@
 			(project "AWS_CPU_Video_Decoder"
 				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
 					(reference "J12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 156.21 245.11 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "50808e57-8a30-46fd-baec-8ed09c6e1453")
+		(property "Reference" "R8"
+			(at 152.146 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100R"
+			(at 156.21 247.65 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
+			(at 154.432 245.11 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 156.21 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 156.21 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a060abe6-389e-40ad-a42b-d553e72030d1")
+		)
+		(pin "2"
+			(uuid "c0b9f517-1174-45fd-9a39-dc6ce61f3c5b")
+		)
+		(instances
+			(project "AWS_CPU_Video_Decoder"
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "R8")
 					(unit 1)
 				)
 			)
@@ -15344,17 +16071,16 @@
 		)
 	)
 	(symbol
-		(lib_id "Mechanical:MountingHole")
-		(at 137.16 232.41 0)
+		(lib_id "Device:R")
+		(at 162.56 250.19 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom no)
+		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "5e563daa-0633-4fd6-bdcb-a50d62cb9ed1")
-		(property "Reference" "H1"
-			(at 139.7 231.1399 0)
+		(uuid "5baa7f50-9b43-46d8-abfa-ef3035372b7b")
+		(property "Reference" "R5"
+			(at 163.83 247.904 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15362,8 +16088,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "MountingHole"
-			(at 139.7 233.6799 0)
+		(property "Value" "330R"
+			(at 165.1 250.19 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15371,8 +16097,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3.5mm"
-			(at 137.16 232.41 0)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
+			(at 162.56 251.968 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15381,7 +16107,77 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 137.16 232.41 0)
+			(at 162.56 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 162.56 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8390f6af-5c2d-4941-8111-f694b0240ab9")
+		)
+		(pin "2"
+			(uuid "084c0dfb-de68-4499-bff6-d0d2e4b0c98e")
+		)
+		(instances
+			(project "AWS_CPU_Video_Decoder"
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "R5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 35.56 245.11 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5e563daa-0633-4fd6-bdcb-a50d62cb9ed1")
+		(property "Reference" "H1"
+			(at 38.1 243.8399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 38.1 246.3799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.5mm"
+			(at 35.56 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 35.56 245.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15390,7 +16186,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 137.16 232.41 0)
+			(at 35.56 245.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15891,6 +16687,71 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 148.59 237.49 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6aee3ff3-e028-423f-a761-4b07f1770212")
+		(property "Reference" "#PWR055"
+			(at 148.59 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 148.59 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 148.59 237.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 148.59 237.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 148.59 237.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4528f2ea-559c-4461-9592-d036b0312134")
+		)
+		(instances
+			(project "AWS_CPU_Video_Decoder"
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "#PWR055")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 95.25 172.72 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -16152,7 +17013,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 90.17 232.41 0)
+		(at 49.53 227.33 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16161,7 +17022,7 @@
 		(fields_autoplaced yes)
 		(uuid "740be22e-6e40-4056-80b0-76d458da4a81")
 		(property "Reference" "#PWR011"
-			(at 90.17 238.76 0)
+			(at 49.53 233.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16170,7 +17031,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 90.17 237.49 0)
+			(at 49.53 232.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16178,7 +17039,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 90.17 232.41 0)
+			(at 49.53 227.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16187,7 +17048,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 90.17 232.41 0)
+			(at 49.53 227.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16196,7 +17057,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 90.17 232.41 0)
+			(at 49.53 227.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16966,6 +17827,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Jumper:Jumper_2_Small_Bridged")
+		(at 176.53 260.35 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8b97e859-2a10-4370-b18e-dc3ec8f5e9f3")
+		(property "Reference" "JP21"
+			(at 176.53 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "Jumper_2_Small_Bridged"
+			(at 176.53 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm"
+			(at 176.53 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 176.53 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Jumper, 2-pole, small symbol, bridged"
+			(at 176.53 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "870d8710-5b7a-4328-9990-28c5ac0a8afe")
+		)
+		(pin "2"
+			(uuid "47ae0b8b-8d43-46b8-b1d5-3c006aa09a9b")
+		)
+		(instances
+			(project "AWS_CPU_Video_Decoder"
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "JP21")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector_Generic:Conn_02x20_Odd_Even")
 		(at 262.89 59.69 0)
 		(unit 1)
@@ -17348,6 +18279,71 @@
 			(project "AWS_CPU_Video_Decoder"
 				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
 					(reference "JP8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 170.18 273.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "95b0aaf7-9b88-4207-b226-b37d549696b1")
+		(property "Reference" "#PWR054"
+			(at 170.18 279.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 170.18 276.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 170.18 273.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 170.18 273.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 170.18 273.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2924b95b-0e3a-4a82-9e6a-81457a6ac9aa")
+		)
+		(instances
+			(project ""
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "#PWR054")
 					(unit 1)
 				)
 			)
@@ -18049,6 +19045,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 156.21 255.27 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a768df5a-4021-44bb-9ced-0ba97d16d326")
+		(property "Reference" "R9"
+			(at 152.146 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100R"
+			(at 156.21 257.81 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
+			(at 154.432 255.27 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 156.21 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 156.21 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8f3f73cf-c12c-4ddd-88c4-d28a253a14f9")
+		)
+		(pin "2"
+			(uuid "aa5872df-a5b1-4e21-9235-1c67e0cf3c99")
+		)
+		(instances
+			(project "AWS_CPU_Video_Decoder"
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "R9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x04_Pin")
 		(at 326.39 222.25 0)
 		(unit 1)
@@ -18337,6 +19402,75 @@
 			(project "AWS_CPU_Video_Decoder"
 				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
 					(reference "J6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 162.56 260.35 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b88c06c4-5cdb-4991-a612-675999389656")
+		(property "Reference" "R4"
+			(at 163.576 258.064 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "330R"
+			(at 165.1 260.35 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
+			(at 162.56 262.128 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 162.56 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 162.56 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "79e1819b-dd77-4409-ae6e-cb0907fed906")
+		)
+		(pin "2"
+			(uuid "c841e4cc-ba12-4afe-b4c7-79c4a06ec7e3")
+		)
+		(instances
+			(project "AWS_CPU_Video_Decoder"
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -18777,7 +19911,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x02_Pin")
-		(at 146.05 266.7 0)
+		(at 72.39 228.6 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -18786,7 +19920,7 @@
 		(fields_autoplaced yes)
 		(uuid "c81ca396-2898-49aa-bc99-5345f203d576")
 		(property "Reference" "J18"
-			(at 146.685 264.16 0)
+			(at 73.025 226.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18794,7 +19928,7 @@
 			)
 		)
 		(property "Value" "Conn_01x02_Pin"
-			(at 146.685 264.16 0)
+			(at 73.025 226.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18803,7 +19937,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
-			(at 146.05 266.7 0)
+			(at 72.39 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18812,7 +19946,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 146.05 266.7 0)
+			(at 72.39 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18821,7 +19955,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 146.05 266.7 0)
+			(at 72.39 228.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18839,6 +19973,145 @@
 			(project "AWS_CPU_Video_Decoder"
 				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
 					(reference "J18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 162.56 270.51 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c825e040-dd1a-4d70-83d2-09ea3e6d2296")
+		(property "Reference" "R10"
+			(at 164.084 268.224 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "330R"
+			(at 165.1 270.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
+			(at 162.56 272.288 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 162.56 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 162.56 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ea610b98-21cd-4fa6-af20-cd7fb4a94493")
+		)
+		(pin "2"
+			(uuid "d47f1df5-94a8-4762-844e-280b2f941d13")
+		)
+		(instances
+			(project "AWS_CPU_Video_Decoder"
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "R10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Jumper:Jumper_2_Small_Bridged")
+		(at 176.53 250.19 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ca08d227-9b43-4089-b2d9-787778767be4")
+		(property "Reference" "JP20"
+			(at 176.53 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "Jumper_2_Small_Bridged"
+			(at 176.53 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm"
+			(at 176.53 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 176.53 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Jumper, 2-pole, small symbol, bridged"
+			(at 176.53 250.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9920048e-7a92-45e0-83a9-fa4f1e665dff")
+		)
+		(pin "2"
+			(uuid "f21027b1-31dc-457d-8bf9-adbf64f275ae")
+		)
+		(instances
+			(project "AWS_CPU_Video_Decoder"
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "JP20")
 					(unit 1)
 				)
 			)
@@ -19709,7 +20982,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 85.09 232.41 0)
+		(at 44.45 227.33 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -19718,7 +20991,7 @@
 		(fields_autoplaced yes)
 		(uuid "e43af077-29af-4873-9274-dc963200d307")
 		(property "Reference" "SW1"
-			(at 85.09 224.79 0)
+			(at 44.45 219.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19726,7 +20999,7 @@
 			)
 		)
 		(property "Value" "Reset"
-			(at 85.09 227.33 0)
+			(at 44.45 222.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19734,7 +21007,7 @@
 			)
 		)
 		(property "Footprint" "Button_Switch_THT:SW_PUSH_6mm"
-			(at 85.09 227.33 0)
+			(at 44.45 222.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19743,7 +21016,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 85.09 227.33 0)
+			(at 44.45 222.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19752,7 +21025,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 85.09 232.41 0)
+			(at 44.45 227.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20244,75 +21517,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x02_Pin")
-		(at 146.05 255.27 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ea397982-7609-4f4b-93b1-2bba674a33ad")
-		(property "Reference" "J17"
-			(at 146.685 252.73 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Conn_01x02_Pin"
-			(at 146.685 252.73 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
-			(at 146.05 255.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 146.05 255.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 146.05 255.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "f7b246a4-1389-4f6e-8c16-4f4e6ac62edd")
-		)
-		(pin "1"
-			(uuid "1266e9a9-955a-4ff1-b685-8d2af97e13f5")
-		)
-		(instances
-			(project ""
-				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
-					(reference "J17")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Jumper:Jumper_2_Small_Bridged")
 		(at 255.27 69.85 0)
 		(unit 1)
@@ -20377,6 +21581,76 @@
 			(project "AWS_CPU_Video_Decoder"
 				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
 					(reference "JP9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Jumper:Jumper_2_Small_Bridged")
+		(at 176.53 240.03 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "eea94c06-3a7e-42d2-9eae-8d0f811285c1")
+		(property "Reference" "JP19"
+			(at 176.53 234.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "Jumper_2_Small_Bridged"
+			(at 176.53 237.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm"
+			(at 176.53 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 176.53 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Jumper, 2-pole, small symbol, bridged"
+			(at 176.53 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d75cb1e7-552c-470e-aef4-e98910fdbc42")
+		)
+		(pin "2"
+			(uuid "c19e6fc3-6711-4886-ab58-be5f21953165")
+		)
+		(instances
+			(project "AWS_CPU_Video_Decoder"
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "JP19")
 					(unit 1)
 				)
 			)
@@ -20655,6 +21929,75 @@
 			(project "AWS_CPU_Video_Decoder"
 				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
 					(reference "JP12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 162.56 240.03 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fcd07a71-9299-432c-88a2-c68ec38012b2")
+		(property "Reference" "R6"
+			(at 163.83 237.744 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "330R"
+			(at 165.1 240.03 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
+			(at 162.56 241.808 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 162.56 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 162.56 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e7560866-ecbd-4145-8a66-bbd55398916a")
+		)
+		(pin "2"
+			(uuid "427a6a47-768b-4eb5-b915-ab94880c399e")
+		)
+		(instances
+			(project "AWS_CPU_Video_Decoder"
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "R6")
 					(unit 1)
 				)
 			)
