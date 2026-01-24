@@ -14,27 +14,33 @@
 #define UART_ID uart0
 #define BAUD_RATE 921600
 
-#define VOLTS_0 0x00
-#define VOLTS_2 0x01
-#define VOLTS_3 0x02
-#define VOLTS_4 0x04
-#define VOLTS_5 0x03
-#define VOLTS_6 0x05
-#define VOLTS_7 0x06
-#define VOLTS_M 0x07
 
-#define LINE_SIZE 2000
+// double packed, two dots per byte
+// We lose a tiny little bit of precision but half the memory requirements
+// But it's computationally more expensive so we need to pre-calculated values we have a possible
+#define VOLTS_0 0x00
+#define VOLTS_2 0x24
+#define VOLTS_3 0x12
+#define VOLTS_4 0x09
+#define VOLTS_5 0x1B
+#define VOLTS_6 0x2D
+#define VOLTS_7 0x36
+#define VOLTS_M 0x3F
+
+#define LINE_SIZE 1000
 
 static uint32_t dma_dummy;
 
-const uint LINE_DOTS = 2000;
+const uint LINE_DOTS = 1000;
 const uint HALF_LINE_DOTS = LINE_DOTS / 2;
-const uint HSYNC_DOTS = 148;
-const uint BACK_PORCH_DOTS = 176;
-const uint SCREEN_DATA_DOTS = 1624;
-const uint FRONT_PORCH_DOTS = 52;
-const uint SHORT_SYNC_DOTS = 74;
-const uint BROAD_SYNC_DOTS = 148;
+
+const uint HSYNC_DOTS = 74;
+const uint BACK_PORCH_DOTS = 88;
+const uint SCREEN_DATA_DOTS = 812;
+const uint FRONT_PORCH_DOTS = 26;
+
+const uint SHORT_SYNC_DOTS = 37;
+const uint BROAD_SYNC_DOTS = 74;
 const uint HSYNC_DOTS_OFFSET = 0;
 
 const uint BACK_PORCH_DOTS_OFFSET = HSYNC_DOTS_OFFSET + HSYNC_DOTS;
@@ -46,8 +52,6 @@ const uint BROAD_SYNC_DOTS_OFFSET = (LINE_DOTS / 2) - BROAD_SYNC_DOTS;
 const uint screen_text_rows = 47;
 const uint screen_text_columns = 80;
 
-// Two bytes per character [character_code, character_attribute]
-uint16_t screen_text_data[47 * 80] = {0};
 
 uint8_t line_bar[LINE_SIZE];
 uint8_t line_vsync[LINE_SIZE] = {0};
@@ -57,7 +61,6 @@ uint8_t line_short_field[LINE_SIZE]; // Orange
 uint8_t line_blank_field[LINE_SIZE]; // White
 uint8_t line_broad_short_field[LINE_SIZE]; // Green/Orange
 uint8_t line_short_broad_field[LINE_SIZE]; // Orange/Green
-
 
 
 #define BIN8(v) \
@@ -113,15 +116,6 @@ uint8_t line_short_broad_field[LINE_SIZE]; // Orange/Green
 // #include <stdint.h>
 // #include <string.h>
 // #include <stdio.h>
-
-#define VOLTS_0 0x00
-#define VOLTS_2 0x01
-#define VOLTS_3 0x02
-#define VOLTS_4 0x04
-#define VOLTS_5 0x03
-#define VOLTS_6 0x05
-#define VOLTS_7 0x06
-#define VOLTS_M 0x07
 
 const static uint8_t FONT[4096] = {
   0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x88,
@@ -412,12 +406,16 @@ static void inline write_font_row(uint8_t *destination, uint8_t character_code, 
         font_row <<= 1;
     }
 
-    for (int i = 0; i < 18; i++) {
-        destination[i] = (font_row >> i) & 1 ? VOLTS_M : VOLTS_3;
+    for (int i = 0; i < 9; i++) {
+        uint8_t f = (font_row >> i * 2) & 1 ? VOLTS_M : VOLTS_3;
+        uint8_t s = (font_row >> (i * 2) + 1) & 1 ? VOLTS_M : VOLTS_3;
+        uint8_t y = f | (s << 3);
+
+        destination[i] = y;
     }
+
+
 }
-
-
 
 void create_broad_field(uint8_t *disaply_line) {
     // Lines: 1,2,314,315
@@ -430,7 +428,7 @@ void create_short_field(uint8_t *disaply_line) {
     // Lines: 4,5,311,312,316,317,624,625
     memset(disaply_line, VOLTS_3, LINE_DOTS); // 3v the line
     memset(disaply_line + SHORT_SYNC_DOTS_OFFSET, VOLTS_0, SHORT_SYNC_DOTS); // Lower field
-    memset(disaply_line + SHORT_SYNC_DOTS_OFFSET + HALF_LINE_DOTS, VOLTS_0, SHORT_SYNC_DOTS); // Upper field
+    memset(disaply_line + HALF_LINE_DOTS, VOLTS_0, SHORT_SYNC_DOTS); // Upper field
 }
 
 void create_blank_field(uint8_t *disaply_line) {
@@ -462,33 +460,33 @@ void create_bar_line(uint8_t *disaply_line) {
     int index = SCREEN_DATA_DOTS_OFFSET;
     create_blank_field(disaply_line);
 
-    memset(disaply_line + index, VOLTS_3, 125);
-    index = index + 125;
+    memset(disaply_line + index, VOLTS_3, 62);
+    index = index + 62;
 
     // Bar 1
-    memset(disaply_line + index, VOLTS_M, 180);
-    index = index + 180;
+    memset(disaply_line + index, VOLTS_M, 90);
+    index = index + 90;
 
     // Bar 2
-    memset(disaply_line + index, VOLTS_4, 270);
-    index = index + 270;
+    memset(disaply_line + index, VOLTS_4, 135);
+    index = index + 135;
 
     // Bar 3
-    memset(disaply_line + index, VOLTS_5, 270);
-    index = index + 270;
+    memset(disaply_line + index, VOLTS_5, 135);
+    index = index + 135;
 
     // Bar 4
-    memset(disaply_line + index, VOLTS_6, 270);
-    index = index + 270;
+    memset(disaply_line + index, VOLTS_6, 135);
+    index = index + 135;
 
-    memset(disaply_line + index, VOLTS_7, 270);
-    index = index + 270;
+    memset(disaply_line + index, VOLTS_7, 135);
+    index = index + 135;
 
-    memset(disaply_line + index, VOLTS_M, 180);
-    index = index + 180;
+    memset(disaply_line + index, VOLTS_M, 135);
+    index = index + 135;
 
-    memset(disaply_line + index, VOLTS_3, 60);
-    index = index + 60;
+    memset(disaply_line + index, VOLTS_3, 30);
+    index = index + 30;
 }
 
 
@@ -535,7 +533,7 @@ void copy_character_line(uint8_t *disaply_line, int disaply_line_count) {
     memset(disaply_line + BACK_PORCH_DOTS_OFFSET, VOLTS_3, BACK_PORCH_DOTS);
     memset(disaply_line + FRONT_PORCH_DOTS_OFFSET, VOLTS_3, FRONT_PORCH_DOTS);
 
-    for (int column = 0; column < 30; column++) {
+    for (int column = 0; column < 2; column++) {
         int offset = (column * 18) + SCREEN_DATA_DOTS_OFFSET + 90;
         uint8_t *data_area = &disaply_line[offset];
 
@@ -553,6 +551,7 @@ void dma1_irq_handler() {
         line_count = 1;
     }
 
+    #if 1
     // Work out what to send to the PIO
     switch (line_count) {
         // Broad field
@@ -598,9 +597,7 @@ void dma1_irq_handler() {
             uint8_t *current_line = line_buffers[active_buffer_index ^ 1];
             int abs_line = (line_count - 35) * 2;
 
-            // memcpy(line_buffers[active_buffer_index ^ 1], line_blank_field, LINE_SIZE);
             copy_character_line(current_line, abs_line);
-
             break;
         }
 
@@ -609,27 +606,26 @@ void dma1_irq_handler() {
             int abs_line = ((line_count - 347) * 2 ) - 1;
             uint8_t *current_line = line_buffers[active_buffer_index ^ 1];
 
-            // memcpy(line_buffers[active_buffer_index ^ 1], line_blank_field, LINE_SIZE);
             copy_character_line(current_line, abs_line);
-
             break;
         }
 
         // Odd half line data (technically ment to have data, but I will blank it)
         case 318:
-            memcpy(line_buffers[active_buffer_index ^ 1], line_short_field, 1000);
-            memcpy(line_buffers[active_buffer_index ^ 1] + 1000, line_blank_field, 1000);
+            memcpy(line_buffers[active_buffer_index ^ 1], line_short_field, 500);
+            memcpy(line_buffers[active_buffer_index ^ 1] + 500, line_blank_field, 500);
             break;
 
         case 623:
-            memcpy(line_buffers[active_buffer_index ^ 1], line_blank_field, 1000);
-            memcpy(line_buffers[active_buffer_index ^ 1] + 1000, line_short_field, 1000);
+            memcpy(line_buffers[active_buffer_index ^ 1], line_blank_field, 500);
+            memcpy(line_buffers[active_buffer_index ^ 1] + 500, line_short_field, 500);
             break;
 
         default:
             printf("Not in the number range %d", line_count);
             break;
     }
+    #endif
 }
 
 
@@ -675,7 +671,7 @@ int main() {
         &c,
         &pio0_hw->txf[sm_dma], // Write address (only need to set this once)
         line_blank_field,      // Don't provide a read address yet
-        2000,                 // Write the same value many times, then halt and interrupt
+        1000,                 // Write the same value many times, then halt and interrupt
         true                  // Don't start yet
     );
 
@@ -702,7 +698,7 @@ int main() {
         &c1,
         &dma_dummy,
         &dma_dummy,
-        1, // trigger at halfway point
+        500, // trigger at halfway point
         true
     );
 

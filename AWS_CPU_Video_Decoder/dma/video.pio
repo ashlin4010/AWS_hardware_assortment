@@ -4,6 +4,7 @@
 .wrap_target
     pull
     out pins, 3
+    out pins, 3 [1]
 .wrap
 
 % c-sdk {
