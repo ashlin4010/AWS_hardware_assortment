@@ -38,7 +38,7 @@ const uint BACK_PORCH_DOTS = 88;
 const uint SCREEN_DATA_DOTS = 812;
 const uint FRONT_PORCH_DOTS = 26;
 
-const uint SHORT_SYNC_DOTS = 37;
+const uint SHORT_SYNC_DOTS = 20;
 const uint BROAD_SYNC_DOTS = 74;
 const uint HSYNC_DOTS_OFFSET = 0;
 
@@ -170,7 +170,7 @@ void copy_character_line(uint8_t *disaply_line, int disaply_line_count) {
     memset(disaply_line + BACK_PORCH_DOTS_OFFSET, VOLTS_3, BACK_PORCH_DOTS);
     memset(disaply_line + FRONT_PORCH_DOTS_OFFSET, VOLTS_3, FRONT_PORCH_DOTS);
 
-    for (int column = 0; column < 4; column++) {
+    for (int column = 0; column < 8; column++) {
         int offset = (column * 9) + SCREEN_DATA_DOTS_OFFSET + 45;
         uint8_t *data_area = &disaply_line[offset];
 
@@ -190,6 +190,7 @@ uint8_t *line_buffers[] = { line_a, line_b };
 volatile bool build_pending = false;
 
 uint8_t *active_line; // This is the line that is  being sent out the PIO via DMA
+uint8_t *inactive_line; // This is the line that is  being sent out the PIO via DMA
 
 void dma1_irq_handler() {
     // Clear DMA1 interrupt
@@ -197,6 +198,8 @@ void dma1_irq_handler() {
 
     // Switch active buffer
     active_buffer_index ^= 1;
+    active_line = line_buffers[active_buffer_index];
+    inactive_line = line_buffers[active_buffer_index ^ 1];
 
     // Start drawing the line
     build_pending = true;
@@ -206,86 +209,6 @@ void dma1_irq_handler() {
     if(line_count >= 626) {
         line_count = 1;
     }
-
-    #if 0
-    // Work out what to send to the PIO
-    switch (line_count) {
-        // Broad field
-        case 1:
-        case 2:
-        case 314:
-        case 315:
-            memcpy(line_buffers[active_buffer_index], line_broad_field, LINE_SIZE);
-            break;
-
-        // Mixed broad short field
-        case 3:
-            memcpy(line_buffers[active_buffer_index], line_broad_short_field, LINE_SIZE);
-            break;
-
-        // Mixed short broad field
-        case 313:
-            memcpy(line_buffers[active_buffer_index], line_short_broad_field, LINE_SIZE);
-            break;
-
-        // Short field
-        case 4:
-        case 5:
-        case 311:
-        case 312:
-        case 316:
-        case 317:
-        case 624:
-        case 625 ... 700:
-            memcpy(line_buffers[active_buffer_index], line_short_field, LINE_SIZE);
-            break;
-
-        // Blank screen data
-        case 6 ... 23:
-        case 319 ... 335:
-            memcpy(line_buffers[active_buffer_index], line_blank_field, LINE_SIZE);
-            break;
-
-        // Even screen data
-        case 24 ... 310: {
-            uint8_t *nonactive_line = line_buffers[active_buffer_index];
-            int abs_line = ((line_count - 24) * 2);
-
-            copy_character_line(nonactive_line, abs_line);
-
-            // memcpy(line_buffers[active_buffer_index], line_bar, LINE_SIZE);
-            break;
-        }
-
-        // Odd screen data
-        case 336 ... 622: {
-            uint8_t *nonactive_line = line_buffers[active_buffer_index];
-            int abs_line = ((line_count - 336) * 2);
-
-            copy_character_line(nonactive_line, abs_line);
-
-            // memcpy(line_buffers[active_buffer_index], line_bar, LINE_SIZE);
-            break;
-        }
-
-        // Odd half line data (technically ment to have data, but I will blank it)
-        case 318:
-            memcpy(line_buffers[active_buffer_index], line_short_field, HALF_LINE_DOTS);
-            memcpy(line_buffers[active_buffer_index] + HALF_LINE_DOTS, line_blank_field, HALF_LINE_DOTS);
-            break;
-
-        case 623:
-            memcpy(line_buffers[active_buffer_index], line_blank_field, HALF_LINE_DOTS);
-            memcpy(line_buffers[active_buffer_index] + HALF_LINE_DOTS, line_short_field, HALF_LINE_DOTS);
-            break;
-
-        default:
-            printf("Not in the number range %d", line_count);
-            break;
-    }
-    #endif
-
-
 }
 
 
@@ -320,6 +243,7 @@ int main() {
     dma_program_init(pio, sm_dma, offset_dma, DAC0);
 
     active_line = line_buffers[active_buffer_index];
+    inactive_line = line_buffers[active_buffer_index ^ 1];
 
     // Set up DMA0 to write to the PIO core
     dma_chan0 = dma_claim_unused_channel(true);
@@ -377,17 +301,17 @@ int main() {
                 case 2:
                 case 314:
                 case 315:
-                    memcpy(line_buffers[active_buffer_index], line_broad_field, LINE_SIZE);
+                    memcpy(inactive_line, line_broad_field, LINE_SIZE);
                     break;
 
                 // Mixed broad short field
                 case 3:
-                    memcpy(line_buffers[active_buffer_index], line_broad_short_field, LINE_SIZE);
+                    memcpy(inactive_line, line_broad_short_field, LINE_SIZE);
                     break;
 
                 // Mixed short broad field
                 case 313:
-                    memcpy(line_buffers[active_buffer_index], line_short_broad_field, LINE_SIZE);
+                    memcpy(inactive_line, line_short_broad_field, LINE_SIZE);
                     break;
 
                 // Short field
@@ -398,47 +322,43 @@ int main() {
                 case 316:
                 case 317:
                 case 624:
-                case 625 ... 700:
-                    memcpy(line_buffers[active_buffer_index], line_short_field, LINE_SIZE);
+                case 625:
+                    memcpy(inactive_line, line_short_field, LINE_SIZE);
                     break;
 
                 // Blank screen data
-                case 6 ... 23:
-                case 319 ... 335:
-                    memcpy(line_buffers[active_buffer_index], line_blank_field, LINE_SIZE);
+                case 6 ... 34:
+                case 319 ... 346:
+                case 612 ... 622:
+                case 300 ... 310:
+                    memcpy(inactive_line, line_blank_field, LINE_SIZE);
                     break;
 
                 // Even screen data
-                case 24 ... 310: {
-                    uint8_t *nonactive_line = line_buffers[active_buffer_index];
-                    int abs_line = (line_count - 24);
+                case 35 ... 299: {
+                    int abs_line = ((line_count - 35) * 2);
 
-                    copy_character_line(nonactive_line, abs_line);
-
-                    // memcpy(line_buffers[active_buffer_index], line_bar, LINE_SIZE);
+                    copy_character_line(inactive_line, abs_line);
                     break;
                 }
 
                 // Odd screen data
-                case 336 ... 622: {
-                    uint8_t *nonactive_line = line_buffers[active_buffer_index];
-                    int abs_line = (line_count - 336);
+                case 347 ... 611: {
+                    int abs_line = ((line_count - 347) * 2) - 1;
 
-                    copy_character_line(nonactive_line, abs_line);
-
-                    // memcpy(line_buffers[active_buffer_index], line_bar, LINE_SIZE);
+                    copy_character_line(inactive_line, abs_line);
                     break;
                 }
 
                 // Odd half line data (technically ment to have data, but I will blank it)
                 case 318:
-                    memcpy(line_buffers[active_buffer_index], line_short_field, HALF_LINE_DOTS);
-                    memcpy(line_buffers[active_buffer_index] + HALF_LINE_DOTS, line_blank_field, HALF_LINE_DOTS);
+                    memcpy(inactive_line, line_short_field, HALF_LINE_DOTS);
+                    memcpy(inactive_line + HALF_LINE_DOTS, line_blank_field, HALF_LINE_DOTS);
                     break;
 
                 case 623:
-                    memcpy(line_buffers[active_buffer_index], line_blank_field, HALF_LINE_DOTS);
-                    memcpy(line_buffers[active_buffer_index] + HALF_LINE_DOTS, line_short_field, HALF_LINE_DOTS);
+                    memcpy(inactive_line, line_blank_field, HALF_LINE_DOTS);
+                    memcpy(inactive_line + HALF_LINE_DOTS, line_short_field, HALF_LINE_DOTS);
                     break;
 
                 default:

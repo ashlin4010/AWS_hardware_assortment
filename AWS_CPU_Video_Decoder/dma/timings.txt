@@ -56,3 +56,21 @@ Line:
     625 lines per frame
     625 - 319 = 306
     Screen = 153 + 319 + 153 = 625
+
+
+
+
+plugs
+
+
+
+12
+xx
+xx
+xx
+xx
+
+
+
+1= Brown
+2= White

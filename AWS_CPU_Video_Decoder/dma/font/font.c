@@ -306,5 +306,6 @@ void write_font_row(uint8_t *destination, uint8_t character_code, uint8_t attrib
         uint8_t y = f | (s << 3);
 
         destination[i] = y;
+        // destination[i] = 0b00000000;
     }
 }
