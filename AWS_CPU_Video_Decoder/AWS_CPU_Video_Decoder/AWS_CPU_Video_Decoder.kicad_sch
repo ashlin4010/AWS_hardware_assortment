@@ -4057,6 +4057,174 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:D"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "D"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Diode"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Sim.Device" "D"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Sim.Pins" "1=K 2=A"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "diode"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "D_0_1"
+				(polyline
+					(pts
+						(xy -1.27 1.27) (xy -1.27 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "D_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:R"
 			(pin_numbers
 				(hide yes)
@@ -6432,12 +6600,6 @@
 		(uuid "2ed513d8-dcd2-4fcb-94d9-aa53600ba1f1")
 	)
 	(junction
-		(at 370.84 39.37)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "2f551486-adfa-4bb2-b416-9a138e4b5bbe")
-	)
-	(junction
 		(at 257.81 54.61)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6520,12 +6682,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "61657975-6335-43f4-97f4-03c9aec7d840")
-	)
-	(junction
-		(at 383.54 39.37)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "61c628a3-800b-4c33-b0dc-6d975cef60b3")
 	)
 	(junction
 		(at 369.57 224.79)
@@ -6918,6 +7074,10 @@
 		(uuid "4058bcf4-355c-4bf6-9b09-e21c7edb8d94")
 	)
 	(no_connect
+		(at 383.54 39.37)
+		(uuid "41acfc69-94f9-4d02-89e1-fa858db4c547")
+	)
+	(no_connect
 		(at 120.65 109.22)
 		(uuid "47210534-8f55-4fd0-b548-2e4c37ced290")
 	)
@@ -6952,6 +7112,10 @@
 	(no_connect
 		(at 322.58 24.13)
 		(uuid "83dfc233-78c9-4bed-abf1-adb883996cea")
+	)
+	(no_connect
+		(at 370.84 39.37)
+		(uuid "8540b495-1b2f-481a-a7d8-017cde40c53b")
 	)
 	(no_connect
 		(at 257.81 39.37)
@@ -14726,73 +14890,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
-		(at 383.54 39.37 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "040791f5-3a9b-4ba8-8201-eccfb24f4eb6")
-		(property "Reference" "#PWR051"
-			(at 379.73 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+5V"
-			(at 387.35 39.3699 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 383.54 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 383.54 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 383.54 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a1fc3c2f-4fd5-439f-a576-cc25589befb5")
-		)
-		(instances
-			(project "AWS_CPU_Video_Decoder"
-				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
-					(reference "#PWR051")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 156.21 265.43 0)
 		(unit 1)
@@ -15232,16 +15329,15 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 317.5 24.13 0)
+		(at 317.5 16.51 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "0f8ed68d-a29f-4425-9673-d8a095ece232")
 		(property "Reference" "#PWR013"
-			(at 317.5 27.94 0)
+			(at 317.5 20.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15250,7 +15346,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 317.5 19.05 0)
+			(at 317.5 12.954 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15258,7 +15354,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 317.5 24.13 0)
+			(at 317.5 16.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15267,7 +15363,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 317.5 24.13 0)
+			(at 317.5 16.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15276,7 +15372,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 317.5 24.13 0)
+			(at 317.5 16.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17049,6 +17145,93 @@
 			(project "AWS_CPU_Video_Decoder"
 				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
 					(reference "JP15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D")
+		(at 317.5 20.32 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "59be244d-0de8-4943-be18-7a98395a445a")
+		(property "Reference" "D1"
+			(at 310.134 17.78 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "1N5817"
+			(at 308.61 20.828 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Diode_THT:D_5W_P12.70mm_Horizontal"
+			(at 317.5 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 317.5 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Diode"
+			(at 317.5 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 317.5 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 317.5 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "45168d8a-3b7c-4e36-849d-06c0677546e4")
+		)
+		(pin "1"
+			(uuid "ab87615b-02bb-4011-87b0-654095c0085b")
+		)
+		(instances
+			(project ""
+				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
+					(reference "D1")
 					(unit 1)
 				)
 			)
@@ -20816,73 +20999,6 @@
 			(project ""
 				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
 					(reference "U1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+5V")
-		(at 370.84 39.37 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c6cfc57d-54a7-4fdd-8c1a-4a45139784f8")
-		(property "Reference" "#PWR050"
-			(at 374.65 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+5V"
-			(at 367.03 39.3699 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 370.84 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 370.84 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 370.84 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "e68440df-b4ce-4097-a277-34fa05a777ba")
-		)
-		(instances
-			(project "AWS_CPU_Video_Decoder"
-				(path "/fd80293a-a4d3-4f78-b100-347c7998a86f"
-					(reference "#PWR050")
 					(unit 1)
 				)
 			)
