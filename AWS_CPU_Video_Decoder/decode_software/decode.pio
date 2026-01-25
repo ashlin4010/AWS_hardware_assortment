@@ -51,7 +51,7 @@ skip_rasters:
 
 capture_loop:
     wait 0 pin 13    ; Wait for the CCLK to go LOW
-    in pins, 8       ; Read in character code
+    in pins, 16       ; Read in character code
     wait 1 pin 13    ; Wait for the CCLK to go HIGH
     jmp x-- capture_loop
 .wrap
@@ -108,7 +108,7 @@ static inline void capture_program_init(PIO pio, uint sm, uint offset, uint code
     sm_config_set_in_pins(&c, code_pins_cclk_base);
 
     // Shift to right, autopush enabled
-    sm_config_set_in_shift(&c, false, true, 8);
+    sm_config_set_in_shift(&c, false, true, 16);
 
     // Load our configuration, and jump to the start of the program
     pio_sm_init(pio, sm, offset, &c);

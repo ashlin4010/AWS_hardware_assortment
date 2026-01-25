@@ -13,7 +13,8 @@
 #define UART_ID uart0
 #define BAUD_RATE 921600
 
-uint8_t screen_data[4096];
+uint16_t screen_data[4096];
+uint8_t att_data[4096];
 
 
 int main() {
@@ -75,19 +76,23 @@ int main() {
 
     printf("\033[?25l");  // hide cursor
 
-
     while (1) {
         uint c_count = 0;
-        uint8_t *p = screen_data;
+        uint16_t *p = screen_data;
 
         capture_program_init(pio, sm_capture, offset_capture, CCODE_PINS);
         raster_program_init(pio, sm_raster, offset_raster, HSYNC_PIN);
         vsync_program_init(pio, sm_vsync, offset_vsync, VSYNC_PIN);
 
         while (c_count < 80 * 29) {
-            uint8_t byte = 0xFF & pio_sm_get_blocking(pio, sm_capture);
+            // uint32_t sample = pio_sm_get_blocking(pio, sm_capture);
+            // uint8_t cc = 0xFF & sample;
+            // uint8_t ac = (0x0F00 & sample) >> 8;
+
+            uint16_t sample_data = 0x0FFF & pio_sm_get_blocking(pio, sm_capture);
+
             c_count++;
-            *p = byte;
+            *p = sample_data;
             p++;
         }
 
@@ -102,12 +107,11 @@ int main() {
         printf("+--------------------------------------------------------------------------------+");
         putchar('\n');
 
-        // uint index = 0;
         for(uint i = 0; i < 29; i++) {
             putchar('|');
             for(uint j = 0; j < 80; j++) {
                 uint index = (i * 80) + j;
-                unsigned char c = screen_data[index];
+                unsigned char c = 0xff & screen_data[index];
 
                 if ((c >= 32 && c <= 126) || c >= 128) {
                     putchar(c);
@@ -125,12 +129,12 @@ int main() {
         for(uint i = 0; i < 29; i++) {
             for(uint j = 0; j < 80; j++) {
                 uint index = (i * 80) + j;
-                unsigned char c = screen_data[index];
+                unsigned char c = 0xff & screen_data[index];
+                unsigned char a = (0xff00 & screen_data[index]) >> 8;
 
-                printf("%02x ", c);
-
+                printf("%02x %02x ", c, a);
             }
-            printf("\n");
+            printf("|");
         }
     }
 
