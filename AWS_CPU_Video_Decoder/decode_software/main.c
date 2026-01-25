@@ -24,6 +24,7 @@ int main() {
     // Allow time for the USB uart to connect
     sleep_ms(3000);
 
+    printf("Running video sample");
     // Use PIO0 for capture of video data
     PIO pio = pio0;
 

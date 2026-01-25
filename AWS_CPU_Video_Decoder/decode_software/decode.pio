@@ -46,13 +46,13 @@ skip_rasters:
     wait irq 2  ; Wait for the right raster line to start capture
 
     ; Skip the first char
-    wait 0 pin 8    ; Wait for the CCLK to go LOW
-    wait 1 pin 8    ; Wait for the CCLK to go HIGH
+    wait 0 pin 13    ; Wait for the CCLK to go LOW
+    wait 1 pin 13    ; Wait for the CCLK to go HIGH
 
 capture_loop:
-    wait 0 pin 8    ; Wait for the CCLK to go LOW
-    in pins, 8      ; Read in character code
-    wait 1 pin 8    ; Wait for the CCLK to go HIGH
+    wait 0 pin 13    ; Wait for the CCLK to go LOW
+    in pins, 8       ; Read in character code
+    wait 1 pin 13    ; Wait for the CCLK to go HIGH
     jmp x-- capture_loop
 .wrap
 ; Return back to the start and wait for next capture
