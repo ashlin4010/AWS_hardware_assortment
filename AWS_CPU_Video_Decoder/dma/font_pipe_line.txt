@@ -1,0 +1,39 @@
+RESET
+VSYNC
+HSYNC
+CCLK
+CC0-CC6 (7)
+AF - Alternate Font
+UL - Underline (This blanks all but row 9, can't underline fonts)
+VS - Video Suppress (Does blinking)
+RV - Reverse Video (This wokrs with blinking and underline)
+HB - Half-Bright
+
+
+
+Lookup character code and attribute code (AF will be part of the character code)
+
+
+// Work out if Normal, Alut, VS, UL
+If VS, p = VS
+else If UL, P = UL
+else p = cc lookup
+
+
+IF HB (uint_16_t)p + 1
+else if RV (uint_16_t)p + 1
+else  
+
+
+
+
+
+
+
+
+Normal, HB, RV = 128 * 3
+ALUT F, HB, RV = 128 * 3
+VS      HB, RV = 3
+UL      HB, RV = 3
+
+                    = 774
