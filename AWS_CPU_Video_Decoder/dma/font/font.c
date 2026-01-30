@@ -2,14 +2,16 @@
 #include <string.h>
 #include <stdio.h>
 
+#define PRINT_FONT 0
+
 #define VOLTS_0 0x00
-#define VOLTS_2 0x24
-#define VOLTS_3 0x12
-#define VOLTS_4 0x09
-#define VOLTS_5 0x1B
-#define VOLTS_6 0x2D
-#define VOLTS_7 0x36
-#define VOLTS_M 0x3F
+#define VOLTS_2 0x04
+#define VOLTS_3 0x02
+#define VOLTS_4 0x01
+#define VOLTS_5 0x03
+#define VOLTS_6 0x05
+#define VOLTS_7 0x06
+#define VOLTS_M 0x07
 
 const uint8_t FONT[4096] = {
   0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x88,
@@ -273,39 +275,148 @@ const uint8_t FONT[4096] = {
 const uint8_t FONT_WIDTH = 9;
 const uint8_t FONT_HEIGHT = 11;
 
-void write_font_row(uint8_t *destination, uint8_t character_code, uint8_t attribute_code, uint8_t line_index) {
-    uint16_t font_offset = 0x00;
-    uint8_t alternate_font = 0;
-    uint8_t half_bit_shift = 0;
+// Font bitmaps
+uint8_t glyph[(256 * 4) + 7][9*11];
+uint8_t *glyph_table[256 + 7][14];
 
-    // Calculate rom address
-    font_offset |= (character_code & 0x7F) | ((line_index & 0x0F) << 7);
 
-    // Set alternate font bit
-    if (alternate_font) font_offset |= (1u << 11);
+void copy_glyph_row(uint8_t *destination, uint8_t character_code, uint8_t attribute_code, uint8_t line_index) {
+    uint8_t *glyph = glyph_table[character_code][0x00];
+    uint8_t *src = glyph + line_index * 9;
 
-    // Check for half bit shift
-    half_bit_shift = !(FONT[font_offset] & 0x80);
+    destination[0] = src[0];
+    destination[1] = src[1];
+    destination[2] = src[2];
+    destination[3] = src[3];
+    destination[4] = src[4];
+    destination[5] = src[5];
+    destination[6] = src[6];
+    destination[7] = src[7];
+    destination[8] = src[8];
+}
 
-    uint32_t font_row = 0;
-    uint32_t shift = 2;
 
-    for (int i = 0; i < 7; i++) {
-        uint32_t bit = (FONT[font_offset] >> i) & 1;
-        font_row |= (bit * 3u) << shift;
-        shift += 2;
+void build_glyph(uint8_t *destination, uint8_t character_code, uint8_t attribute_code) {
+    uint8_t alternate_font = character_code >> 7;
+    uint8_t line_drawing_mode = (!!((character_code - 128) >= 64)) && alternate_font;
+
+    uint8_t reverse_video = (attribute_code >> 2) & 1;
+    uint8_t half_video = (attribute_code >> 3) & 1;
+
+    for(uint8_t line_index = 0; line_index < 11; line_index++) {
+        uint16_t font_offset = 0x00;
+        uint8_t half_bit_shift = 0;
+
+        // Calculate font rom address
+        font_offset |= (character_code & 0x7F) | ((line_index & 0x0F) << 7);
+
+        // Is this an alternate font, load alternate font
+        if (alternate_font) font_offset |= (1u << 11);
+
+        // Do we need to half bit shift this font row?
+        half_bit_shift = !(FONT[font_offset] & 0x80);
+
+        uint32_t glyph_row = 0; // Build the complete glyph row here
+        uint32_t shift = 2;     // Each pixel is made of two dots, glyphs are paded by one pixel eg two dots
+
+        if (!line_drawing_mode) {
+            // Build bit map proto glyph
+            for (int i = 0; i < 7; i++) {
+                uint32_t bit = (FONT[font_offset] >> i) & 1;
+                glyph_row |= (bit * 3u) << shift;
+                shift += 2;
+            }
+
+            // Add single dot shift
+            if (half_bit_shift) {
+                glyph_row <<= 1;
+            }
+        } else {
+            uint8_t f0 = (FONT[font_offset] >> 0) & 1;
+            uint8_t f1 = (FONT[font_offset] >> 1) & 1;
+            uint8_t f2 = (FONT[font_offset] >> 2) & 1;
+            uint8_t f3 = (FONT[font_offset] >> 3) & 1;
+            uint8_t f4 = (FONT[font_offset] >> 4) & 1;
+            uint8_t f5 = (FONT[font_offset] >> 5) & 1;
+            uint8_t f6 = (FONT[font_offset] >> 6) & 1;
+
+            glyph_row |= (f0 << 0) | (f0 << 0 + 1); // Row 0
+            glyph_row |= (f2 << (1 * shift)) | (f2 << (1 * shift) + 1); // Row 1
+            glyph_row |= (f2 << (2 * shift)) | (f2 << (2 * shift) + 1); // Row 2
+            glyph_row |= (f2 << (3 * shift)) | (f2 << (3 * shift) + 1); // Row 3
+            glyph_row |= (f3 << (4 * shift)) | (f3 << (4 * shift) + 1); // Row 4
+            glyph_row |= (f4 << (5 * shift)) | (f4 << (5 * shift) + 1); // Row 5
+            glyph_row |= (f5 << (6 * shift)) | (f5 << (6 * shift) + 1); // Row 6
+            glyph_row |= (f6 << (7 * shift)) | (f6 << (7 * shift) + 1); // Row 7
+            glyph_row |= (f1 << (8 * shift)) | (f1 << (8 * shift) + 1); // Row 8
+        }
+
+
+
+        // Work out DAC values (reverse, half, full)
+        uint8_t active = reverse_video ? VOLTS_3 : (half_video ? VOLTS_4 : VOLTS_M);
+        uint8_t inactive = reverse_video ? (half_video ? VOLTS_4 : VOLTS_M) : VOLTS_3;
+
+        // Replace dots with DAC values
+        for (int i = 0; i < 9; i++) {
+            uint8_t f = (glyph_row >> i * 2) & 1 ? active : inactive; // dot 1
+            uint8_t s = (glyph_row >> (i * 2) + 1) & 1 ? active : inactive; // dot 2
+            uint8_t y = f | (s << 3); // double pack
+
+            #if PRINT_FONT
+            char debug_dot_1;
+            char debug_dot_2;
+            if(f == VOLTS_M) debug_dot_1 = 'X';
+            if(f == VOLTS_4) debug_dot_1 = '.';
+            if(f == VOLTS_3) debug_dot_1 = ' ';
+
+            if(s == VOLTS_M) debug_dot_2 = 'X';
+            if(s == VOLTS_4) debug_dot_2 = '.';
+            if(s == VOLTS_3) debug_dot_2 = ' ';
+
+            printf("%c%c", debug_dot_1, debug_dot_2);
+            #endif
+
+            if(character_code == 4) {
+                // printf("%02x ", y);
+            }
+
+            destination[i] = y; // Write the byte (two dots) to the destination, move to the next pixel
+        }
+
+        #if PRINT_FONT
+        printf("\n");
+        #endif
+        destination += 9;
     }
+    #if PRINT_FONT
+    printf("\n");
+    #endif
+}
 
-    if (half_bit_shift) {
-        font_row <<= 1;
-    }
+void load_glyphs() {
+    for(int cc = 0; cc < 256; cc++) {
+        uint8_t *glyph_storage;
 
-    for (int i = 0; i < 9; i++) {
-        uint8_t f = (font_row >> i * 2) & 1 ? VOLTS_M : VOLTS_3;
-        uint8_t s = (font_row >> (i * 2) + 1) & 1 ? VOLTS_M : VOLTS_3;
-        uint8_t y = f | (s << 3);
+        // Normal
+        glyph_storage = glyph[(cc * 4)];
+        build_glyph(glyph_storage, cc, 0x00);
+        glyph_table[cc][0x00] = glyph_storage;
 
-        destination[i] = y;
-        // destination[i] = 0b00000000;
+        // Normal Reverse
+        glyph_storage = glyph[(cc * 4) + 1];
+        build_glyph(glyph_storage, cc, 0x04);
+        glyph_table[cc][0x04] = glyph_storage;
+
+        // Half Normal
+        glyph_storage = glyph[(cc * 4) + 2];
+        build_glyph(glyph_storage, cc, 0x08);
+        glyph_table[cc][0x08] = glyph_storage;
+
+        // Half Normal Reverse
+        glyph_storage = glyph[(cc * 4) + 3];
+        build_glyph(glyph_storage, cc, 0x0C);
+        glyph_table[cc][0x0C] = glyph_storage;
+
     }
 }

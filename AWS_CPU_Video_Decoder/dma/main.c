@@ -17,14 +17,14 @@
 // double packed, two dots per byte
 // We lose a tiny little bit of precision but half the memory requirements
 // But it's computationally more expensive so we need to pre-calculated values we have a possible
-#define VOLTS_0 0x00
-#define VOLTS_2 0x24
-#define VOLTS_3 0x12
-#define VOLTS_4 0x09
-#define VOLTS_5 0x1B
-#define VOLTS_6 0x2D
-#define VOLTS_7 0x36
-#define VOLTS_M 0x3F
+#define VOLTS_0_DOUBLE 0x00
+#define VOLTS_2_DOUBLE 0x24
+#define VOLTS_3_DOUBLE 0x12
+#define VOLTS_4_DOUBLE 0x09
+#define VOLTS_5_DOUBLE 0x1B
+#define VOLTS_6_DOUBLE 0x2D
+#define VOLTS_7_DOUBLE 0x36
+#define VOLTS_M_DOUBLE 0x3F
 
 #define LINE_SIZE 1000
 
@@ -51,8 +51,13 @@ const uint BROAD_SYNC_DOTS_OFFSET = (LINE_DOTS / 2) - BROAD_SYNC_DOTS;
 const uint screen_text_rows = 47;
 const uint screen_text_columns = 80;
 
-uint8_t line_bar[LINE_SIZE];
-uint8_t line_vsync[LINE_SIZE] = {0};
+
+uint16_t screen_data[50 * 80] = {0};
+
+
+uint8_t screen_row = 0;
+
+uint8_t line_bar[LINE_SIZE] = {0};
 
 uint8_t line_broad_field[LINE_SIZE]; // Green
 uint8_t line_short_field[LINE_SIZE]; // Orange
@@ -107,75 +112,82 @@ uint8_t line_short_broad_field[LINE_SIZE]; // Orange/Green
     ((v & 0x00000001U) ? '1' : '0')
 
 extern void write_font_row(uint8_t *destination, uint8_t character_code, uint8_t attribute_code, uint8_t line_index);
+extern void load_glyphs();
+extern void copy_glyph_row(uint8_t *destination, uint8_t character_code, uint8_t attribute_code, uint8_t line_index);
+
 
 extern const uint8_t FONT_WIDTH;
 extern const uint8_t FONT_HEIGHT;
 
 void create_broad_field(uint8_t *disaply_line) {
     // Lines: 1,2,314,315
-    memset(disaply_line, VOLTS_0, LINE_DOTS); // Zero the line
-    memset(disaply_line + BROAD_SYNC_DOTS_OFFSET, VOLTS_3, BROAD_SYNC_DOTS); // Lower field
-    memset(disaply_line + BROAD_SYNC_DOTS_OFFSET + HALF_LINE_DOTS, VOLTS_3, BROAD_SYNC_DOTS); // Upper field
+    memset(disaply_line, VOLTS_0_DOUBLE, LINE_DOTS); // Zero the line
+    memset(disaply_line + BROAD_SYNC_DOTS_OFFSET, VOLTS_3_DOUBLE, BROAD_SYNC_DOTS); // Lower field
+    memset(disaply_line + BROAD_SYNC_DOTS_OFFSET + HALF_LINE_DOTS, VOLTS_3_DOUBLE, BROAD_SYNC_DOTS); // Upper field
 }
 
 void create_short_field(uint8_t *disaply_line) {
     // Lines: 4,5,311,312,316,317,624,625
-    memset(disaply_line, VOLTS_3, LINE_DOTS); // 3v the line
-    memset(disaply_line + SHORT_SYNC_DOTS_OFFSET, VOLTS_0, SHORT_SYNC_DOTS); // Lower field
-    memset(disaply_line + HALF_LINE_DOTS, VOLTS_0, SHORT_SYNC_DOTS); // Upper field
+    memset(disaply_line, VOLTS_3_DOUBLE, LINE_DOTS); // 3v the line
+    memset(disaply_line + SHORT_SYNC_DOTS_OFFSET, VOLTS_0_DOUBLE, SHORT_SYNC_DOTS); // Lower field
+    memset(disaply_line + HALF_LINE_DOTS, VOLTS_0_DOUBLE, SHORT_SYNC_DOTS); // Upper field
 }
 
 void create_blank_field(uint8_t *disaply_line) {
     // Lines: 6-22, 319-335
-    memset(disaply_line, VOLTS_3, LINE_DOTS); // 3v the line
-    memset(disaply_line + HSYNC_DOTS_OFFSET, VOLTS_0, HSYNC_DOTS);
-    memset(disaply_line + BACK_PORCH_DOTS_OFFSET, VOLTS_3, BACK_PORCH_DOTS);
-    memset(disaply_line + FRONT_PORCH_DOTS_OFFSET, VOLTS_3, FRONT_PORCH_DOTS);
+    memset(disaply_line, VOLTS_3_DOUBLE, LINE_DOTS); // 3v the line
+    memset(disaply_line + HSYNC_DOTS_OFFSET, VOLTS_0_DOUBLE, HSYNC_DOTS);
+    memset(disaply_line + BACK_PORCH_DOTS_OFFSET, VOLTS_3_DOUBLE, BACK_PORCH_DOTS);
+    memset(disaply_line + FRONT_PORCH_DOTS_OFFSET, VOLTS_3_DOUBLE, FRONT_PORCH_DOTS);
 }
 
 
 void create_broad_short_field(uint8_t *disaply_line) {
     // Lines: 3
-    memset(disaply_line, VOLTS_0, HALF_LINE_DOTS); // Half 0v
-    memset(disaply_line + HALF_LINE_DOTS, VOLTS_3, HALF_LINE_DOTS); // Half 3v
-    memset(disaply_line + BROAD_SYNC_DOTS_OFFSET, VOLTS_3, BROAD_SYNC_DOTS); // Lower field
-    memset(disaply_line + SHORT_SYNC_DOTS_OFFSET + HALF_LINE_DOTS, VOLTS_0, SHORT_SYNC_DOTS); // Upper field
+    memset(disaply_line, VOLTS_0_DOUBLE, HALF_LINE_DOTS); // Half 0v
+    memset(disaply_line + HALF_LINE_DOTS, VOLTS_3_DOUBLE, HALF_LINE_DOTS); // Half 3v
+    memset(disaply_line + BROAD_SYNC_DOTS_OFFSET, VOLTS_3_DOUBLE, BROAD_SYNC_DOTS); // Lower field
+    memset(disaply_line + SHORT_SYNC_DOTS_OFFSET + HALF_LINE_DOTS, VOLTS_0_DOUBLE, SHORT_SYNC_DOTS); // Upper field
 }
 
 void create_short_broad_field(uint8_t *disaply_line) {
     // Lines: 313
-    memset(disaply_line, VOLTS_3, HALF_LINE_DOTS); // Half 3v
-    memset(disaply_line + HALF_LINE_DOTS, VOLTS_0, HALF_LINE_DOTS); // Half 0v
-    memset(disaply_line + SHORT_SYNC_DOTS_OFFSET, VOLTS_0, SHORT_SYNC_DOTS); // Lower field
-    memset(disaply_line + BROAD_SYNC_DOTS_OFFSET + HALF_LINE_DOTS, VOLTS_3, BROAD_SYNC_DOTS); // Upper field
+    memset(disaply_line, VOLTS_3_DOUBLE, HALF_LINE_DOTS); // Half 3v
+    memset(disaply_line + HALF_LINE_DOTS, VOLTS_0_DOUBLE, HALF_LINE_DOTS); // Half 0v
+    memset(disaply_line + SHORT_SYNC_DOTS_OFFSET, VOLTS_0_DOUBLE, SHORT_SYNC_DOTS); // Lower field
+    memset(disaply_line + BROAD_SYNC_DOTS_OFFSET + HALF_LINE_DOTS, VOLTS_3_DOUBLE, BROAD_SYNC_DOTS); // Upper field
 }
 
 void create_bar_line(uint8_t *disaply_line) {
     int index = SCREEN_DATA_DOTS_OFFSET;
     create_blank_field(disaply_line);
 
-    memset(disaply_line + index + SCREEN_DATA_DOTS / 2, VOLTS_7, 20);
+    memset(disaply_line + index + SCREEN_DATA_DOTS / 2, VOLTS_7_DOUBLE, 20);
     index = index + (SCREEN_DATA_DOTS / 2) + 20;
-
-    // memset(disaply_line + index, VOLTS_7, SCREEN_DATA_DOTS);
-    // index = index + SCREEN_DATA_DOTS;
-
 }
 
 void copy_character_line(uint8_t *disaply_line, int disaply_line_count) {
     // Work out row and column
-    int row = disaply_line_count % 11;
+    uint8_t row = disaply_line_count % 11;
 
-    memset(disaply_line + HSYNC_DOTS_OFFSET, VOLTS_0, HSYNC_DOTS);
-    memset(disaply_line + BACK_PORCH_DOTS_OFFSET, VOLTS_3, BACK_PORCH_DOTS);
-    memset(disaply_line + FRONT_PORCH_DOTS_OFFSET, VOLTS_3, FRONT_PORCH_DOTS);
+    // Blank the line
+    memset(disaply_line + HSYNC_DOTS_OFFSET, VOLTS_0_DOUBLE, HSYNC_DOTS);
+    memset(disaply_line + BACK_PORCH_DOTS_OFFSET, VOLTS_3_DOUBLE, BACK_PORCH_DOTS);
+    memset(disaply_line + FRONT_PORCH_DOTS_OFFSET, VOLTS_3_DOUBLE, FRONT_PORCH_DOTS);
 
-    for (int column = 0; column < 8; column++) {
+    uint glif_row = screen_row % 11;
+
+    for (int column = 0; column < 80; column++) {
+        uint16_t code = screen_data[(screen_row * 80) + column];
+
+        uint8_t ac = (uint8_t)(code & 0xFF);
+        uint8_t cc = (uint8_t)(code >> 8);
+
         int offset = (column * 9) + SCREEN_DATA_DOTS_OFFSET + 45;
         uint8_t *data_area = &disaply_line[offset];
-
-        write_font_row(data_area, (disaply_line_count / 11) + 1, 0, (uint8_t)row);
+        copy_glyph_row(data_area, cc, ac, row);
     }
+    if (row == 0) screen_row += 1;
 }
 
 int dma_chan0;
@@ -192,6 +204,7 @@ volatile bool build_pending = false;
 uint8_t *active_line; // This is the line that is  being sent out the PIO via DMA
 uint8_t *inactive_line; // This is the line that is  being sent out the PIO via DMA
 
+
 void dma1_irq_handler() {
     // Clear DMA1 interrupt
     dma_hw->ints0 = 1u << dma_chan1;
@@ -199,7 +212,7 @@ void dma1_irq_handler() {
     // Switch active buffer
     active_buffer_index ^= 1;
     active_line = line_buffers[active_buffer_index];
-    inactive_line = line_buffers[active_buffer_index ^ 1];
+    inactive_line = line_buffers[active_buffer_index];
 
     // Start drawing the line
     build_pending = true;
@@ -208,6 +221,7 @@ void dma1_irq_handler() {
 
     if(line_count >= 626) {
         line_count = 1;
+        screen_row = 0;
     }
 }
 
@@ -221,6 +235,21 @@ int main() {
     sleep_ms(3000);
 
     create_bar_line(line_bar);
+    memset(screen_data, 0, sizeof(screen_data)); // Zero the line
+
+
+    for (size_t i = 0; i < (sizeof(screen_data) / sizeof(screen_data[0])); i++) {
+        screen_data[i] = (i % 10) << 7;
+    }
+
+    // screen_data[0 + 10] = 0x0500;
+    // screen_data[1 + 10] = 0x6900;
+    // screen_data[2 + 10] = 0x6700;
+    // screen_data[3 + 10] = 0x6e00;
+    // screen_data[4 + 10] = 0x4f00;
+    // screen_data[5 + 10] = 0x6e00;
+
+    // 0x5300, 0x6900, 0x6700, 0x6e00, 0x4f00, 0x6e00
 
     // Setup lines
     create_broad_field(line_broad_field);
@@ -288,6 +317,9 @@ int main() {
     irq_set_enabled(DMA_IRQ_1, true);
 
     printf("Running\n");
+
+    load_glyphs();
+
     dma_start_channel_mask(1u << dma_chan1) ;
 
     while(true) {
@@ -330,23 +362,23 @@ int main() {
                 case 6 ... 34:
                 case 319 ... 346:
                 case 612 ... 622:
-                case 300 ... 310:
+                case 299 ... 310:
                     memcpy(inactive_line, line_blank_field, LINE_SIZE);
                     break;
 
                 // Even screen data
-                case 35 ... 299: {
-                    int abs_line = ((line_count - 35) * 2);
-
+                case 35 ... 298: {
+                    int abs_line = ((line_count - 35) * 2) + 1;
                     copy_character_line(inactive_line, abs_line);
+                    if (build_pending) printf("OVER RUN\n");
                     break;
                 }
 
                 // Odd screen data
                 case 347 ... 611: {
-                    int abs_line = ((line_count - 347) * 2) - 1;
-
+                    int abs_line = ((line_count - 347) * 2);
                     copy_character_line(inactive_line, abs_line);
+                    if (build_pending) printf("OVER RUN\n");
                     break;
                 }
 
