@@ -2,6 +2,21 @@ let a = "53 00 69 00 67 00 6e 00 4f 00 6e 00 20 00 31 00 30 00 2e 00 32 00 20 00
 
 
 
+
+let full_array = "";
+let count = 0;
 for(let line of a.split("|")) {
-    console.log(line);
+    for(let byte of line.trim().split(" ")) {
+        if (count % 2 == 0) {
+            full_array += `0x${byte}`;
+        } else {
+            full_array += `${byte}, `;
+        }
+        count += 1;
+    }
 }
+
+
+
+
+console.log(full_array);
