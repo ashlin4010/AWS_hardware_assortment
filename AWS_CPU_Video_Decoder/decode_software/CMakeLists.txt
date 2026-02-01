@@ -34,12 +34,12 @@ project(decode C CXX ASM)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-add_executable(decode main.c)
+add_executable(decode src/main.c)
 
-pico_generate_pio_header(decode ${CMAKE_CURRENT_LIST_DIR}/decode.pio)
+pico_generate_pio_header(decode ${CMAKE_CURRENT_LIST_DIR}/src/decode.pio)
 
 # pull in common dependencies
-target_link_libraries(decode pico_stdlib hardware_pio)
+target_link_libraries(decode pico_stdlib hardware_pio hardware_dma)
 
 # enable usb output, disable uart output
 pico_enable_stdio_usb(decode 1)
