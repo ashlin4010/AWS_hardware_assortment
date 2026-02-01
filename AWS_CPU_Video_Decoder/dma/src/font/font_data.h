@@ -1,36 +1,10 @@
-#include <stdint.h>
-#include <string.h>
-#include <stdio.h>
+#ifndef FONT_DATA_H
+#define FONT_DATA_H
 
-#define PRINT_FONT 0
+#include "font.h"
 
-#define VOLTS_0 0x00
-#define VOLTS_2 0x04
-#define VOLTS_3 0x02
-#define VOLTS_4 0x01
-#define VOLTS_5 0x03
-#define VOLTS_6 0x05
-#define VOLTS_7 0x06
-#define VOLTS_M 0x07
 
-#define VOLTS_0_DOUBLE 0x00
-#define VOLTS_2_DOUBLE 0x24
-#define VOLTS_3_DOUBLE 0x12
-#define VOLTS_4_DOUBLE 0x09
-#define VOLTS_5_DOUBLE 0x1B
-#define VOLTS_6_DOUBLE 0x2D
-#define VOLTS_7_DOUBLE 0x36
-#define VOLTS_M_DOUBLE 0x3F
-
-#define ZERO_BRIGHT VOLTS_3
-#define FULL_BRIGHT VOLTS_M
-#define HALF_BRIGHT VOLTS_6
-
-#define ZERO_BRIGHT_D VOLTS_3_DOUBLE
-#define FULL_BRIGHT_D VOLTS_M_DOUBLE
-#define HALF_BRIGHT_D VOLTS_6_DOUBLE
-
-const uint8_t FONT[4096] = {
+static const uint8_t FONT[4096] = {
   0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x88,
   0x80, 0x88, 0x80, 0x80, 0x80, 0x80, 0x90, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80,
   0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80,
@@ -289,10 +263,7 @@ const uint8_t FONT[4096] = {
   0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80
 };
 
-const uint8_t FONT_WIDTH = 9;
-const uint8_t FONT_HEIGHT = 11;
-
-uint8_t blank_glyph[9*11] = {
+uint8_t blank_glyph[FONT_WIDTH * FONT_HEIGHT] = {
     ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D,
     ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D,
     ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D,
@@ -306,7 +277,7 @@ uint8_t blank_glyph[9*11] = {
     ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D,
 };
 
-uint8_t blank_reverse_glyph[9*11] = {
+uint8_t blank_reverse_glyph[FONT_WIDTH * FONT_HEIGHT] = {
     FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D,
     FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D,
     FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D,
@@ -320,7 +291,7 @@ uint8_t blank_reverse_glyph[9*11] = {
     FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D,
 };
 
-uint8_t half_blank_reverse_glyph[9*11] = {
+uint8_t half_blank_reverse_glyph[FONT_WIDTH * FONT_HEIGHT] = {
     HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D,
     HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D,
     HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D,
@@ -334,7 +305,7 @@ uint8_t half_blank_reverse_glyph[9*11] = {
     HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D,
 };
 
-uint8_t underline_glyph[9*11] = {
+uint8_t underline_glyph[FONT_WIDTH * FONT_HEIGHT] = {
     ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D,
     ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D,
     ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D,
@@ -348,7 +319,7 @@ uint8_t underline_glyph[9*11] = {
     FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D,
 };
 
-uint8_t underline_reverse_glyph[9*11] = {
+uint8_t underline_reverse_glyph[FONT_WIDTH * FONT_HEIGHT] = {
     FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D,
     FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D,
     FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D, FULL_BRIGHT_D,
@@ -362,7 +333,7 @@ uint8_t underline_reverse_glyph[9*11] = {
     ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D,
 };
 
-uint8_t half_underline_glyph[9*11] = {
+uint8_t half_underline_glyph[FONT_WIDTH * FONT_HEIGHT] = {
     ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D,
     ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D,
     ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D,
@@ -376,7 +347,7 @@ uint8_t half_underline_glyph[9*11] = {
     HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D,
 };
 
-uint8_t half_underline_reverse_glyph[9*11] = {
+uint8_t half_underline_reverse_glyph[FONT_WIDTH * FONT_HEIGHT] = {
     HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D,
     HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D,
     HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D, HALF_BRIGHT_D,
@@ -390,188 +361,4 @@ uint8_t half_underline_reverse_glyph[9*11] = {
     ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D, ZERO_BRIGHT_D,
 };
 
-
-// Font bitmaps
-uint8_t glyph[(256 * 8) + 7][9*11];
-uint8_t *glyph_table[256 + 7][16];
-uint8_t *default_glyphs[16] = {
-    NULL, // Normal
-    NULL, // Normal
-    blank_glyph,
-    blank_glyph,
-    NULL, // Normal Reverse
-    NULL, // Normal Reverse Underline
-    blank_reverse_glyph,
-    blank_reverse_glyph,
-    NULL, // Half Normal
-    NULL,
-    blank_glyph,
-    blank_glyph,
-    NULL, // Half Normal Reverse
-    NULL, // Half Normal Reverse Underline
-    half_blank_reverse_glyph,
-    half_blank_reverse_glyph
-};
-
-
-void copy_glyph_row(uint8_t *destination, uint8_t character_code, uint8_t attribute_code, uint8_t line_index) {
-    uint8_t *glyph = glyph_table[character_code][attribute_code];
-    uint8_t *src = glyph + line_index * 9;
-
-    destination[0] = src[0];
-    destination[1] = src[1];
-    destination[2] = src[2];
-    destination[3] = src[3];
-    destination[4] = src[4];
-    destination[5] = src[5];
-    destination[6] = src[6];
-    destination[7] = src[7];
-    destination[8] = src[8];
-}
-
-void build_glyph(uint8_t *destination, uint8_t character_code, uint8_t attribute_code) {
-    uint8_t alternate_font = character_code >> 7;
-    uint8_t line_drawing_mode = (!!((character_code - 128) >= 64)) && alternate_font;
-
-    uint8_t reverse_video = (attribute_code >> 2) & 1;
-    uint8_t half_video = (attribute_code >> 3) & 1;
-    uint8_t underline_video = (attribute_code >> 0) & 1;
-
-    for(uint8_t line_index = 0; line_index < 11; line_index++) {
-        uint16_t font_offset = 0x00;
-        uint8_t half_bit_shift = 0;
-
-        // Calculate font rom address
-        font_offset |= (character_code & 0x7F) | ((line_index & 0x0F) << 7);
-
-        // Is this an alternate font, load alternate font
-        if (alternate_font) font_offset |= (1u << 11);
-
-        // Do we need to half bit shift this font row?
-        half_bit_shift = !(FONT[font_offset] & 0x80);
-
-        uint32_t glyph_row = 0; // Build the complete glyph row here
-        uint32_t shift = 2;     // Each pixel is made of two dots, glyphs are paded by one pixel eg two dots
-
-        if (!line_drawing_mode) {
-            // Build bit map proto glyph
-            for (int i = 0; i < 7; i++) {
-                uint32_t bit = (FONT[font_offset] >> i) & 1;
-                glyph_row |= (bit * 3u) << shift;
-                shift += 2;
-            }
-
-            // Add single dot shift
-            if (half_bit_shift) {
-                glyph_row <<= 1;
-            }
-
-            // Set underline
-            if(underline_video && line_index == 9) {
-                glyph_row = 0x3FFFF;
-            }
-
-        } else {
-            uint8_t f0 = (FONT[font_offset] >> 0) & 1;
-            uint8_t f1 = (FONT[font_offset] >> 1) & 1;
-            uint8_t f2 = (FONT[font_offset] >> 2) & 1;
-            uint8_t f3 = (FONT[font_offset] >> 3) & 1;
-            uint8_t f4 = (FONT[font_offset] >> 4) & 1;
-            uint8_t f5 = (FONT[font_offset] >> 5) & 1;
-            uint8_t f6 = (FONT[font_offset] >> 6) & 1;
-
-            glyph_row |= (f0 << 0) | (f0 << 0 + 1); // Row 0
-            glyph_row |= (f2 << (1 * shift)) | (f2 << (1 * shift) + 1); // Row 1
-            glyph_row |= (f2 << (2 * shift)) | (f2 << (2 * shift) + 1); // Row 2
-            glyph_row |= (f2 << (3 * shift)) | (f2 << (3 * shift) + 1); // Row 3
-            glyph_row |= (f3 << (4 * shift)) | (f3 << (4 * shift) + 1); // Row 4
-            glyph_row |= (f4 << (5 * shift)) | (f4 << (5 * shift) + 1); // Row 5
-            glyph_row |= (f5 << (6 * shift)) | (f5 << (6 * shift) + 1); // Row 6
-            glyph_row |= (f6 << (7 * shift)) | (f6 << (7 * shift) + 1); // Row 7
-            glyph_row |= (f1 << (8 * shift)) | (f1 << (8 * shift) + 1); // Row 8
-        }
-
-        // Work out DAC values (reverse, half, full)
-        uint8_t active = reverse_video ? ZERO_BRIGHT : (half_video ? HALF_BRIGHT : FULL_BRIGHT);
-        uint8_t inactive = reverse_video ? (half_video ? HALF_BRIGHT : FULL_BRIGHT) : ZERO_BRIGHT;
-
-        // Replace dots with DAC values
-        for (int i = 0; i < 9; i++) {
-            uint8_t f = (glyph_row >> i * 2) & 1 ? active : inactive; // dot 1
-            uint8_t s = (glyph_row >> (i * 2) + 1) & 1 ? active : inactive; // dot 2
-            uint8_t y = f | (s << 3); // double pack
-
-            #if PRINT_FONT
-            char debug_dot_1;
-            char debug_dot_2;
-            if(f == FULL_BRIGHT) debug_dot_1 = 'X';
-            if(f == HALF_BRIGHT) debug_dot_1 = '.';
-            if(f == ZERO_BRIGHT) debug_dot_1 = ' ';
-
-            if(s == FULL_BRIGHT) debug_dot_2 = 'X';
-            if(s == HALF_BRIGHT) debug_dot_2 = '.';
-            if(s == ZERO_BRIGHT) debug_dot_2 = ' ';
-
-            printf("%c%c", debug_dot_1, debug_dot_2);
-            #endif
-
-            destination[i] = y; // Write the byte (two dots) to the destination, move to the next pixel
-        }
-
-        #if PRINT_FONT
-        printf("\n");
-        #endif
-        destination += 9;
-    }
-    #if PRINT_FONT
-    printf("\n");
-    #endif
-}
-
-void load_glyphs() {
-    for(int cc = 0; cc < 256; cc++) {
-        uint8_t *glyph_storage;
-
-        memcpy(glyph_table[cc], default_glyphs, sizeof(glyph_table[cc]));
-
-        // Normal
-        glyph_storage = glyph[(cc * 8)];
-        build_glyph(glyph_storage, cc, 0x00);
-        glyph_table[cc][0x00] = glyph_storage;
-
-        //Underline 0x01
-        glyph_storage = glyph[(cc * 8) + 1];
-        build_glyph(glyph_storage, cc, 0x01);
-        glyph_table[cc][0x01] = glyph_storage;
-
-        // Normal Reverse
-        glyph_storage = glyph[(cc * 8) + 2];
-        build_glyph(glyph_storage, cc, 0x04);
-        glyph_table[cc][0x04] = glyph_storage;
-
-        // Underline Reverse 0x05
-        glyph_storage = glyph[(cc * 8) + 3];
-        build_glyph(glyph_storage, cc, 0x05);
-        glyph_table[cc][0x05] = glyph_storage;
-
-        // Half Normal
-        glyph_storage = glyph[(cc * 8) + 4];
-        build_glyph(glyph_storage, cc, 0x08);
-        glyph_table[cc][0x08] = glyph_storage;
-
-        // Half Underline  0x09
-        glyph_storage = glyph[(cc * 8) + 5];
-        build_glyph(glyph_storage, cc, 0x09);
-        glyph_table[cc][0x09] = glyph_storage;
-
-        // Half Normal Reverse
-        glyph_storage = glyph[(cc * 8) + 6];
-        build_glyph(glyph_storage, cc, 0x0C);
-        glyph_table[cc][0x0C] = glyph_storage;
-
-        // Half Underline Reverse 0x0D
-        glyph_storage = glyph[(cc * 8) + 7];
-        build_glyph(glyph_storage, cc, 0x0D);
-        glyph_table[cc][0x0D] = glyph_storage;
-    }
-}
+#endif // FONT_DATA_H

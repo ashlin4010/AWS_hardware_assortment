@@ -34,13 +34,14 @@ project(video C CXX ASM)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-add_executable(video main.c)
+add_executable(video src/main.c)
 
 target_sources(video PUBLIC
-    ${CMAKE_CURRENT_LIST_DIR}/font/font.c
-    )
+    ${CMAKE_CURRENT_LIST_DIR}/src/font/font.c
+    ${CMAKE_CURRENT_LIST_DIR}/src/video.c
+)
 
-pico_generate_pio_header(video ${CMAKE_CURRENT_LIST_DIR}/video.pio)
+pico_generate_pio_header(video ${CMAKE_CURRENT_LIST_DIR}/src/video.pio)
 
 # pull in common dependencies
 target_link_libraries(video pico_stdlib hardware_pio hardware_dma)
