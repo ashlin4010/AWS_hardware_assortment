@@ -36,7 +36,15 @@ pico_sdk_init()
 # Add executable. Default name is the project name, version 0.1
 add_executable(capture_and_encode src/main.c)
 
-pico_generate_pio_header(capture_and_encode ${CMAKE_CURRENT_LIST_DIR}/src/decode.pio)
+target_sources(capture_and_encode PUBLIC
+    ${CMAKE_CURRENT_LIST_DIR}/src/font/font.c
+    ${CMAKE_CURRENT_LIST_DIR}/src/video.c
+)
+
+pico_generate_pio_header(capture_and_encode
+    ${CMAKE_CURRENT_LIST_DIR}/src/decode.pio
+    ${CMAKE_CURRENT_LIST_DIR}/src/video.pio
+)
 
 # pull in common dependencies
 target_link_libraries(capture_and_encode pico_stdlib hardware_pio hardware_dma)

@@ -1,0 +1,37 @@
+.pio_version 0 // only requires PIO version 0
+
+.program dma
+.wrap_target
+    pull
+    out pins, 3
+    nop
+    out pins, 3
+.wrap
+
+% c-sdk {
+
+static inline void dma_program_init(PIO pio, uint sm, uint offset, uint dac) {
+
+    pio_gpio_init(pio, dac);
+    pio_gpio_init(pio, dac + 1);
+    pio_gpio_init(pio, dac + 2);
+
+    pio_sm_set_consecutive_pindirs(pio, sm, dac, 3, true);
+
+    pio_sm_config c = dma_program_get_default_config(offset);
+
+    sm_config_set_out_pins(&c, dac, 3);
+
+    sm_config_set_fifo_join(&c, PIO_FIFO_JOIN_TX);
+
+    sm_config_set_out_shift(&c, true, false, 8);
+
+    // Set clock division (div by 4 for 31.25Mhz state machine)
+    sm_config_set_clkdiv(&c, 2);
+
+    pio_sm_init(pio, sm, offset, &c);
+
+    pio_sm_set_enabled(pio, sm, true);
+}
+
+%}
