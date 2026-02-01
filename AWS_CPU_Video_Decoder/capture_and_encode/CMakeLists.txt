@@ -28,26 +28,26 @@ set(PICO_BOARD pico CACHE STRING "Board type")
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
-project(video C CXX ASM)
+project(capture_and_encode C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-add_executable(video main.c)
+add_executable(capture_and_encode src/main.c)
 
-pico_generate_pio_header(video ${CMAKE_CURRENT_LIST_DIR}/video.pio)
+pico_generate_pio_header(capture_and_encode ${CMAKE_CURRENT_LIST_DIR}/src/decode.pio)
 
 # pull in common dependencies
-target_link_libraries(video pico_stdlib hardware_pio hardware_dma)
+target_link_libraries(capture_and_encode pico_stdlib hardware_pio hardware_dma)
 
 # enable usb output, disable uart output
-pico_enable_stdio_usb(video 1)
-pico_enable_stdio_uart(video 0)
+pico_enable_stdio_usb(capture_and_encode 1)
+pico_enable_stdio_uart(capture_and_encode 0)
 
 if (PICO_CYW43_SUPPORTED)
-    target_link_libraries(video pico_cyw43_arch_none)
+    target_link_libraries(capture_and_encode pico_cyw43_arch_none)
 endif()
 
 # create map/bin/hex file etc.
-pico_add_extra_outputs(video)
+pico_add_extra_outputs(capture_and_encode)
