@@ -6,9 +6,6 @@
     wait 1 pin 0
     wait 0 pin 0    ; Wait for Vsync falling edge
     irq 0           ; Signal start of new screen
-
-; hlt:
-;     jmp hlt
 .wrap
 
 ; This program will wait for the start of a new screen
@@ -61,6 +58,7 @@ capture_loop:
 
 % c-sdk {
 static inline void vsync_program_init(PIO pio, uint sm, uint offset, uint vsync) {
+    pio_gpio_init(pio, vsync);
 
     // Set vsync as input
     pio_sm_set_consecutive_pindirs(pio, sm, vsync, 1, false);
@@ -80,6 +78,8 @@ static inline void vsync_program_init(PIO pio, uint sm, uint offset, uint vsync)
 
 static inline void raster_program_init(PIO pio, uint sm, uint offset, uint hsync) {
 
+    pio_gpio_init(pio, hsync);
+
     // Set hsync as input
     pio_sm_set_consecutive_pindirs(pio, sm, hsync, 1, false);
 
@@ -98,6 +98,13 @@ static inline void raster_program_init(PIO pio, uint sm, uint offset, uint hsync
 }
 
 static inline void capture_program_init(PIO pio, uint sm, uint offset, uint code_pins_cclk_base) {
+
+    pio_gpio_init(pio, code_pins_cclk_base);
+
+    for (int cc_pin = code_pins_cclk_base; cc_pin > code_pins_cclk_base + 8; cc_pin++) {
+        pio_gpio_init(pio, cc_pin);
+    }
+
     // Set the cclk and code pins as inputs
     pio_sm_set_consecutive_pindirs(pio, sm, code_pins_cclk_base, 9, false);
 

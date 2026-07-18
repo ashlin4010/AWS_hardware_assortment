@@ -2,6 +2,7 @@
 #define VIDEO_H
 
 #include "font/font.h"
+#include <stdbool.h>
 
 #define SCREEN_WIDTH 80
 #define SCREEN_HEIGHT 48
@@ -53,6 +54,7 @@ void copy_buffer_to_screen(const uint16_t *buffer, size_t size, uint8_t start_ro
 
 static inline void write_scanline(uint8_t *inactive_line) {
     static int line_count;
+    bool double_resolution = false;
 
     switch (line_count) {
         // Broad field
@@ -95,7 +97,7 @@ static inline void write_scanline(uint8_t *inactive_line) {
 
         // Even screen data
         case 35 ... 298: {
-            uint32_t feild_line = ((line_count - 35) * 2) + 1;
+            uint32_t feild_line = double_resolution ? ((line_count - 35) * 2) + 1 : line_count - 35;
             uint32_t font_row = feild_line % FONT_HEIGHT;
             uint32_t screen_row = feild_line / FONT_HEIGHT;
             copy_character_line(inactive_line, screen_row, font_row);
@@ -104,7 +106,7 @@ static inline void write_scanline(uint8_t *inactive_line) {
 
         // Odd screen data
         case 347 ... 611: {
-            uint32_t feild_line = ((line_count - 347) * 2);
+            uint32_t feild_line = double_resolution ? (line_count - 347) * 2 : line_count - 347;
             uint32_t font_row = feild_line % FONT_HEIGHT;
             uint32_t screen_row = feild_line / FONT_HEIGHT;
             copy_character_line(inactive_line, screen_row, font_row);

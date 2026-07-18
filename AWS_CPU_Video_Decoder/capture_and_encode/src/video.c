@@ -27,7 +27,7 @@ uint8_t line_blank_field[LINE_SIZE]; // White
 uint8_t line_broad_short_field[LINE_SIZE]; // Green/Orange
 uint8_t line_short_broad_field[LINE_SIZE]; // Orange/Green
 
-uint16_t screen_data[SCREEN_HEIGHT * SCREEN_WIDTH];
+uint16_t screen_data[SCREEN_HEIGHT * SCREEN_WIDTH] = {0};
 
 static void create_broad_field(uint8_t *disaply_line) {
     // Lines: 1,2,314,315
@@ -96,7 +96,7 @@ void copy_character_line(uint8_t *disaply_line, uint32_t screen_row, uint32_t gl
 }
 
 void fill_screen_with_character(uint8_t character_code, uint8_t attribute_code) {
-    uint16_t character_data = ((uint16_t)character_code << 8) | attribute_code;
+    uint16_t character_data = ((uint16_t)(0x0F & attribute_code) << 8) | character_code;
 
     for(int i = 0; i < sizeof(screen_data) / sizeof(screen_data[0]); i++ ) {
         screen_data[i] = character_data;

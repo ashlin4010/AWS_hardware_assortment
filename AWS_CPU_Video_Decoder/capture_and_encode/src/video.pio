@@ -1,6 +1,6 @@
 .pio_version 0 // only requires PIO version 0
 
-.program dma
+.program video
 .wrap_target
     pull
     out pins, 3
@@ -10,7 +10,7 @@
 
 % c-sdk {
 
-static inline void dma_program_init(PIO pio, uint sm, uint offset, uint dac) {
+static inline void video_program_init(PIO pio, uint sm, uint offset, uint dac) {
 
     pio_gpio_init(pio, dac);
     pio_gpio_init(pio, dac + 1);
@@ -18,7 +18,7 @@ static inline void dma_program_init(PIO pio, uint sm, uint offset, uint dac) {
 
     pio_sm_set_consecutive_pindirs(pio, sm, dac, 3, true);
 
-    pio_sm_config c = dma_program_get_default_config(offset);
+    pio_sm_config c = video_program_get_default_config(offset);
 
     sm_config_set_out_pins(&c, dac, 3);
 
@@ -26,7 +26,7 @@ static inline void dma_program_init(PIO pio, uint sm, uint offset, uint dac) {
 
     sm_config_set_out_shift(&c, true, false, 8);
 
-    // Set clock division (div by 4 for 31.25Mhz state machine)
+    // Set clock division 31.25Mhz
     sm_config_set_clkdiv(&c, 2);
 
     pio_sm_init(pio, sm, offset, &c);
