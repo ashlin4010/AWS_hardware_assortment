@@ -27,7 +27,9 @@ uint8_t line_blank_field[LINE_SIZE]; // White
 uint8_t line_broad_short_field[LINE_SIZE]; // Green/Orange
 uint8_t line_short_broad_field[LINE_SIZE]; // Orange/Green
 
-uint16_t screen_data[SCREEN_HEIGHT * SCREEN_WIDTH] = {0};
+extern int16_t line_offset;
+uint16_t screen_data[SCREEN_HEIGHT * SCREEN_WIDTH + (SCREEN_WIDTH * 20)] = {0};
+
 
 static void create_broad_field(uint8_t *disaply_line) {
     // Lines: 1,2,314,315
@@ -70,6 +72,8 @@ static void create_short_broad_field(uint8_t *disaply_line) {
 
 void copy_character_line(uint8_t *disaply_line, uint32_t screen_row, uint32_t glyph_row) {
     uint32_t column = 0;
+
+    screen_row = screen_row + line_offset;
 
     // Blank the line
     memset(disaply_line + HSYNC_DOTS_OFFSET, VOLTS_0_DOUBLE, HSYNC_DOTS);

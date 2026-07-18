@@ -4,7 +4,7 @@ This project is not finished. The goal is to decode and re-output the video capt
 
 ## Flashing ##
 ```
-picotool.exe load bin/decode.elf -fx
+picotool.exe load bin/capture_and_encode.elf -fx
 ```
 
 ## Building ##

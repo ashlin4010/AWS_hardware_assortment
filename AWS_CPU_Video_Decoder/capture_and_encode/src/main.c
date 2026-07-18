@@ -10,6 +10,10 @@
 #include "font/font.h"
 #include "video.h"
 
+#include "jkroso/gpio-interrupt.c"
+#include "jkroso/encoder.c"
+#include "jkroso/button.c"
+
 // Capture pins
 #define VSYNC_PIN 2
 #define HSYNC_PIN 3
@@ -28,8 +32,10 @@
 #define UART_ID uart0
 #define BAUD_RATE 921600
 
-extern uint16_t screen_data[SCREEN_HEIGHT * SCREEN_WIDTH];
-uint16_t *screen_data_offset = screen_data + SCREEN_WIDTH * 0; // Allow video capture to be offset
+extern uint16_t screen_data[];
+int16_t line_offset = 0;
+bool is_high_resolution = false;
+rotary_encoder_t *encoder;
 
 int dma_capture;
 int dma_video;
@@ -41,6 +47,26 @@ uint8_t line_buffers[2][LINE_SIZE];
 uint8_t *active_line = line_buffers[0];
 uint8_t *inactive_line = line_buffers[0];
 
+
+void onchange(rotary_encoder_t *encoder) {
+    int16_t offset = encoder->position / 4;
+    if (offset > 20) {
+        offset = 20;
+        encoder->position = 20 * 4;
+    }
+    if (offset < 0) {
+        offset = 0;
+        encoder->position = 0;
+    }
+    line_offset = offset;
+}
+
+void onpress(button_t *button) {
+    is_high_resolution = button->state ? is_high_resolution : !is_high_resolution;
+    line_offset = 0;
+    encoder->position = 0;
+}
+
 // Called at the end of ever frame capture, re-trigger DMA
 void dma_capture_irq_handler() {
     // Clear interrupt
@@ -49,7 +75,7 @@ void dma_capture_irq_handler() {
     // Reload DMA
     dma_channel_set_write_addr(
         dma_capture,
-        screen_data_offset,
+        screen_data,
         true
     );
 }
@@ -122,7 +148,7 @@ int main() {
     dma_channel_configure(
         dma_capture,
         &dma_capture_cf,
-        screen_data_offset,                     // Write address
+        screen_data,                            // Write address
         &pio_capture->rxf[sm_capture],          // Read address (the address of the pio's fifo)
         AWS_SCREEN_WIDTH * AWS_SCREEN_HEIGHT,   // Number of transfers
         false                                   // Autostart
@@ -216,11 +242,15 @@ int main() {
     }
     #endif
 
-    while (1) {}
+    encoder = create_encoder(27, 28, onchange);
+    button_t *button = create_button(26, onpress);
+    while (true) tight_loop_contents();
 
     // Clean up
     pio_remove_program_and_unclaim_sm(&vsync_program, pio_capture, sm_vsync, offset_vsync);
     pio_remove_program_and_unclaim_sm(&raster_program, pio_capture, sm_raster, offset_raster);
     pio_remove_program_and_unclaim_sm(&capture_program, pio_capture, sm_capture, offset_capture);
     pio_remove_program_and_unclaim_sm(&video_program, pio_video, sm_video, offset_video);
+
+    return 0;
 }

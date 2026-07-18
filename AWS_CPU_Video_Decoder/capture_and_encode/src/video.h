@@ -42,6 +42,8 @@ extern uint8_t line_blank_field[LINE_SIZE]; // White
 extern uint8_t line_broad_short_field[LINE_SIZE]; // Green/Orange
 extern uint8_t line_short_broad_field[LINE_SIZE]; // Orange/Green
 
+extern bool is_high_resolution;
+
 void video_init();
 
 void copy_character_line(uint8_t *disaply_line, uint32_t screen_row, uint32_t glyph_row);
@@ -97,7 +99,7 @@ static inline void write_scanline(uint8_t *inactive_line) {
 
         // Even screen data
         case 35 ... 298: {
-            uint32_t feild_line = double_resolution ? ((line_count - 35) * 2) + 1 : line_count - 35;
+            uint32_t feild_line = is_high_resolution ? ((line_count - 35) * 2) + 1 : line_count - 35;
             uint32_t font_row = feild_line % FONT_HEIGHT;
             uint32_t screen_row = feild_line / FONT_HEIGHT;
             copy_character_line(inactive_line, screen_row, font_row);
@@ -106,7 +108,7 @@ static inline void write_scanline(uint8_t *inactive_line) {
 
         // Odd screen data
         case 347 ... 611: {
-            uint32_t feild_line = double_resolution ? (line_count - 347) * 2 : line_count - 347;
+            uint32_t feild_line = is_high_resolution ? (line_count - 347) * 2 : line_count - 347;
             uint32_t font_row = feild_line % FONT_HEIGHT;
             uint32_t screen_row = feild_line / FONT_HEIGHT;
             copy_character_line(inactive_line, screen_row, font_row);
