@@ -83,7 +83,7 @@ void dma_capture_irq_handler() {
 // Called just before starting the next scanline
 void dma_video_restart_irq_handler() {
     // Clear interrupt
-    dma_hw->ints0 = 1u << dma_restart;
+    dma_hw->ints1 = 1u << dma_restart;
 
     // Switch active line buffer
     active_buffer_index ^= 1;
@@ -127,7 +127,7 @@ int main() {
     // PIO Program Init
     // -------------------------------
     capture_program_init(pio_capture, sm_capture, offset_capture, CCODE_PINS);
-    raster_program_init(pio_capture, sm_raster, offset_capture, HSYNC_PIN);
+    raster_program_init(pio_capture, sm_raster, offset_raster, HSYNC_PIN);
     vsync_program_init(pio_capture, sm_vsync, offset_vsync, VSYNC_PIN);
     video_program_init(pio_video, sm_video, offset_video, DAC0);
 
@@ -174,7 +174,7 @@ int main() {
         &c0,
         &pio_video->txf[sm_video],  // Write address (the address of the pio's fifo)
         line_blank_field,           // Address of the data to be read
-        1000,                       // Number of transfers
+        LINE_SIZE,                  // Number of transfers
         false                       // Autostart
     );
 
