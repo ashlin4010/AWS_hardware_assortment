@@ -1,0 +1,140 @@
+[D0]
+name=Head Sel 3
+enabled=true
+color=4279638298
+conversion_type=0
+conv_options=0
+
+[D1]
+name=Head Sel 2
+enabled=true
+color=4287582722
+conversion_type=0
+conv_options=0
+
+[D2]
+name=Write Gate
+enabled=true
+color=4291559424
+conversion_type=0
+conv_options=0
+
+[D3]
+name=Seek Complete
+enabled=true
+color=4294277376
+conversion_type=0
+conv_options=0
+
+[D4]
+name=Track 0
+enabled=true
+color=4293776384
+conversion_type=0
+conv_options=0
+
+[D5]
+name=Write Falut
+enabled=true
+color=4285780502
+conversion_type=0
+conv_options=0
+
+[D6]
+name=Head Sel 0
+enabled=true
+color=4281623972
+conversion_type=0
+conv_options=0
+
+[D7]
+name=Head Sel 1
+enabled=true
+color=4285878395
+conversion_type=0
+conv_options=0
+
+[D8]
+name=Index
+enabled=true
+color=4287138437
+conversion_type=0
+conv_options=0
+
+[D9]
+name=Ready
+enabled=true
+color=4293848812
+conversion_type=0
+conv_options=0
+
+[D10]
+name=Step
+enabled=true
+color=4279638298
+conversion_type=0
+conv_options=0
+
+[D11]
+name=Drive Sel 0
+enabled=true
+color=4287582722
+conversion_type=0
+conv_options=0
+
+[D12]
+name=Drive Sel 1
+enabled=true
+color=4291559424
+conversion_type=0
+conv_options=0
+
+[D13]
+name=Drive Sel 2
+enabled=true
+color=4294277376
+conversion_type=0
+conv_options=0
+
+[D14]
+name=Drive Sel 3
+enabled=true
+color=4293776384
+conversion_type=0
+conv_options=0
+
+[D15]
+name=Dir In
+enabled=true
+color=4285780502
+conversion_type=0
+conv_options=0
+
+[General]
+decode_signals=0
+generated_signals=0
+views=1
+meta_objs=0
+
+[view0]
+scale=0.010433966390761065
+v_offset=-332
+splitter_state=@ByteArray(\0\0\0\xff\0\0\0\x1\0\0\0\x2\0\0\0\x82\0\0\tw\x1\0\0\0\x1\x1\0\0\0\x1\0)
+segment_display_mode=1
+offset=22 serialization::archive 20 0 0 0 0 1 6007514 21424579 59600964 44129558 41285303 0 1 0 6
+D0\trace_height=26
+D1\trace_height=26
+D2\trace_height=26
+D3\trace_height=26
+D4\trace_height=26
+D5\trace_height=26
+D6\trace_height=26
+D7\trace_height=26
+D8\trace_height=26
+D9\trace_height=26
+D10\trace_height=26
+D11\trace_height=26
+D12\trace_height=26
+D13\trace_height=26
+D14\trace_height=26
+D15\trace_height=26

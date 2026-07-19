@@ -11088,6 +11088,16 @@
 		)
 		(uuid "dbb985f2-c500-48ac-8257-772808ee3d33")
 	)
+	(text "Note that Pin 16 and Pin 17 are wired together on the hard drive controller.\nPin 6 look to be unused.\n\nFor the floppy to work pin 16/17 must go to flopy pin34"
+		(exclude_from_sim no)
+		(at 315.722 141.478 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "f3427d49-f496-4854-8599-e992ae8936a1")
+	)
 	(text "P10"
 		(exclude_from_sim no)
 		(at 208.026 140.208 0)
@@ -11763,6 +11773,10 @@
 	(no_connect
 		(at 125.73 341.63)
 		(uuid "632893a5-a43a-4a4e-8ba8-c411dec9f592")
+	)
+	(no_connect
+		(at 331.47 36.83)
+		(uuid "6b720d8e-148c-4182-b3c1-0a024b5a7920")
 	)
 	(no_connect
 		(at 34.29 224.79)
@@ -13720,16 +13734,6 @@
 	)
 	(wire
 		(pts
-			(xy 331.47 49.53) (xy 349.25 49.53)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9f922bc7-0c77-4db1-accb-ee9a2f318c2b")
-	)
-	(wire
-		(pts
 			(xy 422.91 120.65) (xy 427.99 120.65)
 		)
 		(stroke
@@ -14410,16 +14414,6 @@
 	)
 	(wire
 		(pts
-			(xy 349.25 36.83) (xy 349.25 49.53)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "dc57eefd-a4fc-4aca-9729-a0b5a746dd54")
-	)
-	(wire
-		(pts
 			(xy 501.65 46.99) (xy 505.46 46.99)
 		)
 		(stroke
@@ -14727,16 +14721,6 @@
 			(type default)
 		)
 		(uuid "f563a817-211b-4b99-9cec-5ba0ac265e9c")
-	)
-	(wire
-		(pts
-			(xy 331.47 36.83) (xy 349.25 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f68b25e6-8571-4b0d-84c5-0e384cee9cd4")
 	)
 	(wire
 		(pts
@@ -15250,7 +15234,7 @@
 	)
 	(global_label "2SIDED-"
 		(shape input)
-		(at 349.25 49.53 0)
+		(at 331.47 49.53 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -15260,7 +15244,7 @@
 		)
 		(uuid "149ca5d3-f666-42a4-af28-05f79e578ee2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 360.5204 49.53 0)
+			(at 342.7404 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
